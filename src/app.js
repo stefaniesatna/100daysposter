@@ -6,6 +6,17 @@ const backgroundColour = [
     document.getElementById("background-colour-green"), 
 ];
 const customBackgroundColour = document.getElementById("colour-code");
+customBackgroundColour.addEventListener("input", clearColourSelection);
+
+const downloadButton = document.getElementById("download");
+downloadButton.addEventListener("click", downloadButtonClicked);
+
+const textColour = [
+    document.getElementById("dark"),
+    document.getElementById("light")
+];
+
+const quote = document.getElementById("quote");
 
 function backgroundColourChanged() {
     customBackgroundColour.value = "";
@@ -18,15 +29,12 @@ function whatColourIsSelected(){
     if (customBackgroundColour.value !== "") {
         return customBackgroundColour.value;
     }
-    
     for (let i = 0; i < backgroundColour.length; i++){
         if (backgroundColour[i].checked){
             return backgroundColour[i].value;
         }
     }
 }
-
-customBackgroundColour.addEventListener("input", clearColourSelection);
 
 function clearColourSelection(){
     for (let i = 0; i < backgroundColour.length; i++){
@@ -36,3 +44,7 @@ function clearColourSelection(){
     }
 }
 
+//--------Download
+function downloadButtonClicked(){
+    console.log(whatColourIsSelected());
+}
