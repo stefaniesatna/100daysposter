@@ -18,6 +18,14 @@ const textColour = [
 
 const quote = document.getElementById("quote");
 
+const size = [
+    document.getElementById("a4"),
+    document.getElementById("a3"),
+    document.getElementById("a2"),
+    document.getElementById("a1"),
+    document.getElementById("a0"),
+]
+
 function backgroundColourChanged() {
     customBackgroundColour.value = "";
 }
