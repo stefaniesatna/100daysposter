@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/app.css">
+</head>
+<body>
+    <div>
+        <img src="A0.png" width="420" height="594">
+        <div>
+            <div>
+                <input type ="radio" id="background-colour-white" name="background-colour" value="#ffffff" checked>
+                <label for="background-colour-white">White</label>
+            </div>
+            <div>
+                <input type ="radio" id="background-colour-black" name="background-colour" value="#000000">
+                <label for="background-colour-black">Black</label>
+            </div>
+            <div>
+                <input type ="radio" id="background-colour-green" name="background-colour" value="#00ff00">
+                <label for="background-colour-green">Green</label>
+            </div>
+            <div>
+                <input type ="radio" id="background-colour-orange" name="background-colour" value="#ffa500">
+                <label for="background-colour-orange">Orange</label>
+            </div>
+            <div>
+                <label for="colour-code">Or enter colour code</label>
+                <input type="text" id="colour-code">
+            </div>
+            <div>
+                <input type="radio" id="dark" name="colour-text" checked>
+                <label for="dark">Dark</label>
+            </div>
+            <div>
+                <input type="radio" id="light" name="colour-text">
+                <label for="light">Light</label>
+            </div>  
+            <div>
+                <label for="quote">Quote</label>
+                <textarea id="quote"></textarea>
+            </div>
+        </div>
+        
+    </div>
+    <div>
+        <div>
+            <input type="radio" id="a4" name="size" checked />
+            <label for="a4">
+                A4
+                <img src="me.jpg" width="259.2.4" height="172.8">
+            </label>
+        </div>
+        <div>
+            <input type="radio" id="a3" name="size" />
+            <label for="a3">
+                A3
+                <img src="me.jpg" width="259.2.4" height="172.8">
+            </label>
+        </div>
+        <div>
+            <input type="radio" id="a2" name="size" />
+            <label for="a2">
+                A2
+                <img src="me.jpg" width="259.2.4" height="172.8">
+            </label>
+        </div>
+        <div>
+            <input type="radio" id="a1" name="size" />
+            <label for="a1">
+                A1
+                <img src="me.jpg" width="259.2.4" height="172.8">
+            </label>
+        </div>
+        <div>
+            <input type="radio" id="a0" name="size" />
+            <label for="a0">
+                A0
+                <img src="me.jpg" width="259.2.4" height="172.8">
+            </label>
+        </div>
+    </div>
+    <a id="download" href="karinka-kovanda.pdf" download><button> Download </button></a>
+    <script src="./app.js" type="application/javascript"></script>
+</body>
+</html>
