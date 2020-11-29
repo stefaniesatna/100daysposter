@@ -33,7 +33,7 @@ function backgroundColourChanged() {
 for (let i = 0; i < backgroundColour.length; i++){
     backgroundColour[i].addEventListener("change", backgroundColourChanged)
 }
-function whatColourIsSelected(){
+function backgroundColourSelected(){
     if (customBackgroundColour.value !== "") {
         return customBackgroundColour.value;
     }
@@ -52,7 +52,26 @@ function clearColourSelection(){
     }
 }
 
+function textColourSelected(){
+    for (let i = 0; i < textColour.length; i++){
+        if (textColour[i].checked){
+            return textColour[i].value;
+        }
+    }
+}
+
+function sizeSelected(){
+    for (let i = 0; i < size.length; i++){
+        if (size[i].checked){
+            return size[i].value;
+        }
+    }
+}
+
 //--------Download
 function downloadButtonClicked(){
-    console.log(whatColourIsSelected());
+    console.log(backgroundColourSelected());
+    console.log(textColourSelected());
+    console.log(quote.value);
+    console.log(sizeSelected());
 }
