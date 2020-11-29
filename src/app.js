@@ -15,6 +15,10 @@ for (let i = 0; i < backgroundColour.length; i++){
     backgroundColour[i].addEventListener("change", backgroundColourChanged)
 }
 function whatColourIsSelected(){
+    if (customBackgroundColour.value !== "") {
+        return customBackgroundColour.value;
+    }
+    
     for (let i = 0; i < backgroundColour.length; i++){
         if (backgroundColour[i].checked){
             return backgroundColour[i].value;
