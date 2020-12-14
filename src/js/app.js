@@ -1,4 +1,5 @@
-console.log("something")
+import {saveByteArray, createPdf} from './pdf'
+
 const backgroundColour = [
     document.getElementById("background-colour-white"),
     document.getElementById("background-colour-black"),
@@ -69,9 +70,7 @@ function sizeSelected(){
 }
 
 //--------Download
-function downloadButtonClicked(){
-    console.log(backgroundColourSelected());
-    console.log(textColourSelected());
-    console.log(quote.value);
-    console.log(sizeSelected());
+async function downloadButtonClicked(){
+    const pdfBytes = await createPdf(backgroundColourSelected())
+    saveByteArray("poster.pdf", pdfBytes)
 }

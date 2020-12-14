@@ -7,82 +7,87 @@
     <link rel="stylesheet" href="style/app.css">
 </head>
 <body>
-    <div>
-        <img src="A0.png" width="420" height="594">
-        <div>
-            <div>
-                <input type ="radio" id="background-colour-white" name="background-colour" value="#ffffff" checked>
-                <label for="background-colour-white">White</label>
+    <div class="container">
+        <div class="poster-preview">
+            <img src="./img/A0.png" width="420" height="594">
+        </div>
+        <div class="customise">
+            <div class = "background-colour-select-box">
+                <div class="background-colour-select">
+                    <input type ="radio" id="background-colour-white" name="background-colour" value="#ffffff" checked>
+                    <label for="background-colour-white">White</label>
+                </div>
+                <div class="background-colour-select">
+                    <input type ="radio" id="background-colour-black" name="background-colour" value="#000000">
+                    <label for="background-colour-black">Black</label>
+                </div>
+                <div class="background-colour-select">
+                    <input type ="radio" id="background-colour-green" name="background-colour" value="#00ff00">
+                    <label for="background-colour-green">Green</label>
+                </div>
+                <div class="background-colour-select">
+                    <input type ="radio" id="background-colour-orange" name="background-colour" value="#ffa500">
+                    <label for="background-colour-orange">Orange</label>
+                </div>
+                <div>
+                    <label for="colour-code">Or enter colour code</label>
+                    <input type="text" id="colour-code">
+                </div>
             </div>
-            <div>
-                <input type ="radio" id="background-colour-black" name="background-colour" value="#000000">
-                <label for="background-colour-black">Black</label>
+            <div class="text-colour-box">
+                <div class="text-colour-select">
+                    <input type="radio" id="dark" name="text-colour" checked value="dark">
+                    <label for="dark">Dark</label>
+                </div>
+                <div class="text-colour-select">
+                    <input type="radio" id="light" name="text-colour" value="light">
+                    <label for="light">Light</label>
+                </div>
             </div>
-            <div>
-                <input type ="radio" id="background-colour-green" name="background-colour" value="#00ff00">
-                <label for="background-colour-green">Green</label>
-            </div>
-            <div>
-                <input type ="radio" id="background-colour-orange" name="background-colour" value="#ffa500">
-                <label for="background-colour-orange">Orange</label>
-            </div>
-            <div>
-                <label for="colour-code">Or enter colour code</label>
-                <input type="text" id="colour-code">
-            </div>
-            <div>
-                <input type="radio" id="dark" name="text-colour" checked value="dark">
-                <label for="dark">Dark</label>
-            </div>
-            <div>
-                <input type="radio" id="light" name="text-colour" value="light">
-                <label for="light">Light</label>
-            </div>  
+        </div>
+        <div class="quote">  
             <div>
                 <label for="quote">Quote</label>
                 <textarea id="quote"></textarea>
             </div>
         </div>
-        
-    </div>
-    <div>
-        <div>
-            <input type="radio" id="a4" name="size" checked value="a4" />
+        <div class=size>
             <label for="a4">
+                <img src="./img/me.jpg" width="259.2.4" height="172.8">
                 A4
-                <img src="me.jpg" width="259.2.4" height="172.8">
             </label>
+            <input type="radio" id="a4" name="size" checked value="a4" />
         </div>
-        <div>
-            <input type="radio" id="a3" name="size" value="a3" />
+        <div class=size>
             <label for="a3">
+                <img src="./img/me.jpg" width="259.2.4" height="172.8">
                 A3
-                <img src="me.jpg" width="259.2.4" height="172.8">
             </label>
+            <input type="radio" id="a3" name="size" value="a3" />
         </div>
-        <div>
-            <input type="radio" id="a2" name="size" value="a2" />
+        <div class=size>
             <label for="a2">
+                <img src="./img/me.jpg" width="259.2.4" height="172.8">
                 A2
-                <img src="me.jpg" width="259.2.4" height="172.8">
             </label>
+            <input type="radio" id="a2" name="size" value="a2" />
         </div>
-        <div>
-            <input type="radio" id="a1" name="size" value ="a1"/>
+        <div class=size>
             <label for="a1">
+                <img src="./img/me.jpg" width="259.2.4" height="172.8">
                 A1
-                <img src="me.jpg" width="259.2.4" height="172.8">
             </label>
+            <input type="radio" id="a1" name="size" value ="a1"/>
         </div>
-        <div>
-            <input type="radio" id="a0" name="size" value ="a0"/>
+        <div class=size>
             <label for="a0">
+                <img src="./img/me.jpg" width="259.2.4" height="172.8">
                 A0
-                <img src="me.jpg" width="259.2.4" height="172.8">
             </label>
+            <input type="radio" id="a0" name="size" value ="a0"/>
         </div>
+            <button id="download" class="download"> Get your poster </button> 
+        <script src="./js/app.js" type="application/javascript"></script>
     </div>
-    <button id="download"> Download </button>
-    <script src="./app.js" type="application/javascript"></script>
 </body>
 </html>

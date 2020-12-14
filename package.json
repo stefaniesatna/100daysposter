@@ -1,0 +1,14 @@
+{
+  "name": "poster-website",
+  "version": "1.0.0",
+  "main": "src/index.html",
+  "repository": "https://github.com/stefaniesatna/poster-site.git",
+  "author": "Stefanie Satna <satnastefani@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "pdf-lib": "^1.13.0"
+  },
+  "browserslist": [
+    "since 2017-06"
+  ]  
+}

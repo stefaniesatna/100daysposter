@@ -1,3 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Hairline&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Outline&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
+
 body {
-    background-color: #e7e3ee
+    background-image: url("../img/halftone-yellow.png");
+    background-repeat: repeat;
+    background-size: 500px;
 }
+
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 2fr 2fr 2fr 2fr 2fr 1fr;
+        grid-gap: 20px;
+
+        width: 1000px;
+        height: 1220px;
+
+        /* background-color: #555ca2; */
+
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+        .size{
+            background-color:#63C7B2;
+            position: relative;
+            border-radius: 8px;
+            text-align: center;
+            font-family: Bungee, cursive;
+            font-size: 50px;
+            color:white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .poster-preview {
+            /* background-color: #fffbff; */
+            grid-row-start: 1;
+            grid-row-end: 4;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .customise {
+            /* background-color: #fffbff; */
+            grid-row-start: 4;
+            grid-row-end: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+            .background-colour-select-box{
+                flex: 1;
+                background-color: white;
+                border-radius: 8px;
+                padding: 1.5em;
+                margin: 0.5em 0 0.5em 0;
+            }
+
+                .background-colour-select{
+                    float: left;
+                    display: inline;
+                }
+
+            .custom-colour-code-box{
+                flex: 1;
+                background-color: pink;
+                border-radius: 8px;
+                padding: 1.5em;
+                margin: 0.5em 0 0.5em 0;
+            }
+
+            .text-colour-box{
+                flex: 1;
+                background-color: white;
+                border-radius: 8px;
+                padding: 1.5em;
+                margin: 0.5em 0 0.5em 0;
+            }
+
+                .text-colour-select{
+                    float: left;
+                    display: inline;
+                }
+
+        .quote{
+            background-color: #fffbff;
+            border-radius: 8px;
+            grid-row-start: 5;
+            grid-row-end: 6;
+        }
+
+        .download {
+            background-color: #FF0AC2;
+            border-radius: 8px;
+            grid-column-start: 1;
+            grid-column-end: 3;
+            border: none;
+            font-family: Bungee Shade, cursive;
+            color: #080705;
+            font-size: 50px;
+            
+        }
+
