@@ -5,6 +5,9 @@
   "repository": "https://github.com/stefaniesatna/poster-site.git",
   "author": "Stefanie Satna <satnastefani@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "parcel src/index.html"
+  },
   "dependencies": {
     "pdf-lib": "^1.13.0"
   },

@@ -34,6 +34,7 @@ function backgroundColourChanged() {
 for (let i = 0; i < backgroundColour.length; i++){
     backgroundColour[i].addEventListener("change", backgroundColourChanged)
 }
+
 function backgroundColourSelected(){
     if (customBackgroundColour.value !== "") {
         return customBackgroundColour.value;
@@ -53,6 +54,9 @@ function clearColourSelection(){
     }
 }
 
+/**
+ * Returns the selected text colour as a string
+ */
 function textColourSelected(){
     for (let i = 0; i < textColour.length; i++){
         if (textColour[i].checked){
@@ -71,6 +75,6 @@ function sizeSelected(){
 
 //--------Download
 async function downloadButtonClicked(){
-    const pdfBytes = await createPdf(backgroundColourSelected())
-    saveByteArray("poster.pdf", pdfBytes)
+    const pdfBytes = await createPdf(backgroundColourSelected());
+    saveByteArray("poster.pdf", pdfBytes);
 }
