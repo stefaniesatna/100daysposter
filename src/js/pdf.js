@@ -1,4 +1,4 @@
-import { PDFDocument, StandardFonts, rgb, degrees, grayscale, PageSizes } from 'pdf-lib'
+import { PDFDocument, StandardFonts, rgb, degrees, grayscale, PageSizes, drawLine } from 'pdf-lib'
 
 export function saveByteArray(name, byte) {
     var blob = new Blob([byte], { type: "application/pdf" });
@@ -30,7 +30,7 @@ export async function createPdf(backgroundColor) {
 
     //====GRID
 
-    // Draw a rectangle to outline the 100-days squares
+    // Draw a rectangle to outline the 100-days big square
     let squareSize = width * 0.8
     page.drawRectangle({
         x: (width - squareSize) / 2,
@@ -41,27 +41,41 @@ export async function createPdf(backgroundColor) {
         borderWidth: 2,
     })
 
-    // Draw a little square
-    let littleSquareSize = squareSize / 10
-    page.drawRectangle({
-        x: (width - squareSize) / 2,
-        y: ((height - squareSize) / 2) + 9 * littleSquareSize,
-        width: squareSize / 10,
-        height: squareSize /10, 
-        borderColor: hexToRgb("#000000"),
-        borderWidth: 2,
-    })
+    // Draw a grid of numbers 1-100
+    for (let i = 0; i < 10; i++){
+        for (let j = 0; j < 10; j++){
+            let littleSquareSize = squareSize / 10
+            let littleSquareX = (width - squareSize) / 2
+            let littleSquareY = ((height - squareSize) / 2) + 9 * littleSquareSize
 
-    // Draw a number in the middle of the little square
-    let number = "1"
-    let numberSize = 28
-    let numberWidth = helveticaFont.widthOfTextAtSize(number, numberSize);
-    let numberHeight = helveticaFont.heightAtSize(numberSize) - 6
-    page.drawText(number, {
-        y: ((height - squareSize - numberHeight) / 2) + 9.5 * littleSquareSize,
-        x: ((width - squareSize - numberWidth) / 2) + 0.5 * littleSquareSize,
-        size: numberSize
-    });
+            let posDifX = j * littleSquareSize;
+            let posDifY = -1 * (i * littleSquareSize);
+            
+            // Draw little squares
+            page.drawRectangle({
+                x: littleSquareX + posDifX,
+                y: littleSquareY + posDifY,
+                width: squareSize / 10,
+                height: squareSize / 10, 
+                borderColor: hexToRgb("#000000"),
+                borderWidth: 2,
+            })
+
+            // Draw numbers in the middle of the little squares
+            let number = (10 * i + j + 1).toString();
+            let numberSize = 18;
+            let numberWidth = helveticaFont.widthOfTextAtSize(number, numberSize);
+            let numberHeight = helveticaFont.heightAtSize(numberSize) - 6
+            let numberX = littleSquareX + (littleSquareSize / 2) - (numberWidth / 2);
+            let numberY = littleSquareY + (littleSquareSize / 2) - (numberHeight / 2);
+
+            page.drawText(number, {
+                x: numberX + posDifX,
+                y: numberY + posDifY,
+                size: numberSize
+            });
+        }
+    }
 
     //========
 
