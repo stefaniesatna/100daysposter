@@ -65,6 +65,10 @@ function textColourSelected(){
     }
 }
 
+function quoteSelected(){
+    return quote.value;
+}
+
 function sizeSelected(){
     for (let i = 0; i < size.length; i++){
         if (size[i].checked){
@@ -75,6 +79,6 @@ function sizeSelected(){
 
 //--------Download
 async function downloadButtonClicked(){
-    const pdfBytes = await createPdf(backgroundColourSelected());
+    const pdfBytes = await createPdf(backgroundColourSelected(), textColourSelected(), quoteSelected());
     saveByteArray("poster.pdf", pdfBytes);
 }

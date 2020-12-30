@@ -9,7 +9,7 @@ export function saveByteArray(name, byte) {
     link.click();
 };
 
-export async function createPdf(backgroundColor) {
+export async function createPdf(backgroundColor, textColour, quote) {
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage(PageSizes.A4)
 
@@ -37,7 +37,7 @@ export async function createPdf(backgroundColor) {
         y: (height - squareSize) / 2,
         width: squareSize,
         height: squareSize,
-        borderColor: hexToRgb("#000000"),
+        borderColor: hexToRgb(textColour),
         borderWidth: 2,
     })
 
@@ -57,7 +57,7 @@ export async function createPdf(backgroundColor) {
                 y: littleSquareY + posDifY,
                 width: squareSize / 10,
                 height: squareSize / 10, 
-                borderColor: hexToRgb("#000000"),
+                borderColor: hexToRgb(textColour),
                 borderWidth: 2,
             })
 
@@ -72,7 +72,8 @@ export async function createPdf(backgroundColor) {
             page.drawText(number, {
                 x: numberX + posDifX,
                 y: numberY + posDifY,
-                size: numberSize
+                size: numberSize,
+                color: hexToRgb(textColour)
             });
         }
     }
@@ -80,11 +81,23 @@ export async function createPdf(backgroundColor) {
     //========
 
     // For positioning in the centre of the document we need to get the width of the text
-    let textWidth = helveticaFont.widthOfTextAtSize("100 days of code", 36);
+
+    // Draw title
+    let titleTextWidth = helveticaFont.widthOfTextAtSize("100 days of code", 36);
     page.drawText("100 days of code", {
         y: height - 100,
-        x: (width - textWidth) / 2,
-        size: 36
+        x: (width - titleTextWidth) / 2,
+        size: 36,
+        color: hexToRgb(textColour)
+    });
+
+    // Draw quote
+    let quoteTextWidth = helveticaFont.widthOfTextAtSize(quote, 18);
+    page.drawText(quote, {
+        y: height - 750,
+        x: (width - quoteTextWidth) / 2,
+        size: 18,
+        color: hexToRgb(textColour)
     });
 
     const pdfBytes = await pdfDoc.save()
