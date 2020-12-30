@@ -32,9 +32,11 @@ export async function createPdf(backgroundColor, textColour, quote) {
 
     // Draw a rectangle to outline the 100-days big square
     let squareSize = width * 0.8
+    let bigRectangleX = (width - squareSize) / 2;
+    let bigRectangleY = (height - squareSize) / 2
     page.drawRectangle({
-        x: (width - squareSize) / 2,
-        y: (height - squareSize) / 2,
+        x: bigRectangleX,
+        y: bigRectangleY,
         width: squareSize,
         height: squareSize,
         borderColor: hexToRgb(textColour),
@@ -42,11 +44,12 @@ export async function createPdf(backgroundColor, textColour, quote) {
     })
 
     // Draw a grid of numbers 1-100
+    let littleSquareSize = squareSize / 10;
+    let littleSquareX = (width - squareSize) / 2
+    let littleSquareY = ((height - squareSize) / 2) + 9 * littleSquareSize
+    
     for (let i = 0; i < 10; i++){
         for (let j = 0; j < 10; j++){
-            let littleSquareSize = squareSize / 10
-            let littleSquareX = (width - squareSize) / 2
-            let littleSquareY = ((height - squareSize) / 2) + 9 * littleSquareSize
 
             let posDifX = j * littleSquareSize;
             let posDifY = -1 * (i * littleSquareSize);
@@ -83,20 +86,22 @@ export async function createPdf(backgroundColor, textColour, quote) {
     // For positioning in the centre of the document we need to get the width of the text
 
     // Draw title
-    let titleTextWidth = helveticaFont.widthOfTextAtSize("100 days of code", 36);
+    let titleTextHeight = 36;
+    let titleTextWidth = helveticaFont.widthOfTextAtSize("100 days of code", titleTextHeight);
     page.drawText("100 days of code", {
         y: height - 100,
         x: (width - titleTextWidth) / 2,
-        size: 36,
+        size: titleTextHeight,
         color: hexToRgb(textColour)
     });
 
     // Draw quote
-    let quoteTextWidth = helveticaFont.widthOfTextAtSize(quote, 18);
+    let quoteTextHeight = 18
+    let quoteTextWidth = helveticaFont.widthOfTextAtSize(quote, quoteTextHeight);
     page.drawText(quote, {
-        y: height - 750,
         x: (width - quoteTextWidth) / 2,
-        size: 18,
+        y: bigRectangleY - littleSquareSize - (quoteTextHeight / 2),
+        size: quoteTextHeight,
         color: hexToRgb(textColour)
     });
 
