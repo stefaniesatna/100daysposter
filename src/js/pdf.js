@@ -88,9 +88,11 @@ export async function createPdf(backgroundColor, textColour, quote) {
     // Draw title
     let titleTextHeight = 36;
     let titleTextWidth = helveticaFont.widthOfTextAtSize("100 days of code", titleTextHeight);
+    let titleX = (width - titleTextWidth) / 2
+    let titleY = bigRectangleY + littleSquareSize * 10 + (titleTextHeight)
     page.drawText("100 days of code", {
-        y: height - 100,
-        x: (width - titleTextWidth) / 2,
+        x: titleX,
+        y: titleY,
         size: titleTextHeight,
         color: hexToRgb(textColour)
     });
@@ -98,9 +100,11 @@ export async function createPdf(backgroundColor, textColour, quote) {
     // Draw quote
     let quoteTextHeight = 18
     let quoteTextWidth = helveticaFont.widthOfTextAtSize(quote, quoteTextHeight);
+    let quoteX = (width - quoteTextWidth) / 2
+    let quoteY = bigRectangleY - (littleSquareSize / 2) - quoteTextHeight
     page.drawText(quote, {
-        x: (width - quoteTextWidth) / 2,
-        y: bigRectangleY - littleSquareSize - (quoteTextHeight / 2),
+        x: quoteX,
+        y: quoteY,
         size: quoteTextHeight,
         color: hexToRgb(textColour)
     });
