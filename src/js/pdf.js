@@ -102,14 +102,12 @@ export async function createPdf(backgroundColor, textColour, quote) {
 
     // Variables to draw a quote
     let quoteTextHeight = 18
-    let quoteLineOne = splitText(quote, helveticaFont, quoteTextHeight, quoteBoxWidth)
-
-    let quoteTextWidth = helveticaFont.widthOfTextAtSize(quoteLineOne, quoteTextHeight);
-    let quoteX = centerText(quoteTextWidth, width);
+    let quoteLines = splitText(quote, helveticaFont, quoteTextHeight, quoteBoxWidth)
     let quoteY = bigRectangleY - (littleSquareSize / 2) - quoteTextHeight
+    let quoteLinesNum = 4;
 
     // Draw rectangles for quote
-    for (let i = 0; i < 4; i++){
+    for (let i = 0; i < quoteLinesNum; i++){
         page.drawRectangle({
             x: quoteBoxStartX,
             y: quoteY - (i * quoteTextHeight),
@@ -121,12 +119,17 @@ export async function createPdf(backgroundColor, textColour, quote) {
     }
 
     // Draw quote 
-    page.drawText(quoteLineOne, {
-        x: quoteX,
-        y: quoteY,
-        size: quoteTextHeight,
-        color: hexToRgb(textColour)
-    });
+    for (let i = 0; i < quoteLinesNum; i++){
+        let quoteTextWidth = helveticaFont.widthOfTextAtSize(quoteLines[i], quoteTextHeight);
+        let quoteX = centerText(quoteTextWidth, width);
+
+        page.drawText(quoteLines[i], {
+            x: quoteX,
+            y: quoteY - (i * quoteTextHeight),
+            size: quoteTextHeight,
+            color: hexToRgb(textColour)
+        });
+    }
 
     const pdfBytes = await pdfDoc.save()
     return pdfBytes;
@@ -151,17 +154,35 @@ function centerText(textWidth, parentWidth){
 
 // Function to split text such that the quote wraps into multiple lines
 function splitText(text, font, textSize, parentWidth){
-    let str = text;
-    let textWidth = font.widthOfTextAtSize(str, textSize)
     let lines = [];
+    let str = text;
+    
 
-    while (textWidth > parentWidth){
-        let lastSpaceIndex = str.lastIndexOf(" ");
-        str = str.substring(0, lastSpaceIndex);
-        textWidth = font.widthOfTextAtSize(str, textSize);
+    for (let i = 0; i < 4; i++){
+        // Initialize / reinitialize remaining string
+        let cutOffStr = ""
+        let textWidth = font.widthOfTextAtSize(str, textSize)
+
+        while (textWidth > parentWidth){
+            // Find the last word 
+            let lastSpaceIndex = str.lastIndexOf(" ");
+
+            // Add the last word substring to the cut off string
+            cutOffStr = str.substring(lastSpaceIndex, str.length) + cutOffStr
+
+            // Remove last word from the string
+            str = str.substring(0, lastSpaceIndex);
+
+            textWidth = font.widthOfTextAtSize(str, textSize);
+        }
+        console.log(cutOffStr)
+        lines.push(str)
+
+        // Reassign str to the remaining string 
+        str = cutOffStr;
+
     }
 
-    lines.push(str)
-
-    return str;
+    console.log(lines)
+    return lines;
 }
