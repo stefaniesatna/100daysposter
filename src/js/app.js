@@ -18,6 +18,7 @@ const textColour = [
 ];
 
 const quote = document.getElementById("quote");
+const quoteAuthor = document.getElementById("quoteAuthor")
 
 const size = [
     document.getElementById("a4"),
@@ -69,6 +70,10 @@ function quoteSelected(){
     return quote.value;
 }
 
+function quoteAuthorSelected(){
+    return quoteAuthor.value;
+}
+
 function sizeSelected(){
     for (let i = 0; i < size.length; i++){
         if (size[i].checked){
@@ -79,6 +84,6 @@ function sizeSelected(){
 
 //--------Download
 async function downloadButtonClicked(){
-    const pdfBytes = await createPdf(backgroundColourSelected(), textColourSelected(), quoteSelected());
+    const pdfBytes = await createPdf(backgroundColourSelected(), textColourSelected(), quoteSelected(), quoteAuthorSelected());
     saveByteArray("poster.pdf", pdfBytes);
 }

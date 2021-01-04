@@ -9,10 +9,10 @@ export function saveByteArray(name, byte) {
     link.click();
 };
 
-export async function createPdf(backgroundColor, textColour, quote) {
+export async function createPdf(backgroundColor, textColour, quote, quoteAuthor) {
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage(PageSizes.A4)
-    quote = formatText(quote)
+    quote = formatQuote(quote)
 
     const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
     page.setFont(helveticaFont)
@@ -107,17 +107,17 @@ export async function createPdf(backgroundColor, textColour, quote) {
     let quoteY = bigRectangleY - (littleSquareSize / 2) - quoteTextHeight
     let quoteLinesNum = 4;
 
-    // // Draw rectangles for quote
-    // for (let i = 0; i < quoteLinesNum; i++){
-    //     page.drawRectangle({
-    //         x: quoteBoxStartX,
-    //         y: quoteY - (i * quoteTextHeight),
-    //         width: quoteBoxWidth,
-    //         height: quoteTextHeight, 
-    //         borderColor: hexToRgb(textColour),
-    //         borderWidth: 2,
-    //     })
-    // }
+    // Draw rectangles for quote
+    for (let i = 0; i < quoteLinesNum; i++){
+        page.drawRectangle({
+            x: quoteBoxStartX,
+            y: quoteY - (i * quoteTextHeight),
+            width: quoteBoxWidth,
+            height: quoteTextHeight, 
+            borderColor: hexToRgb(textColour),
+            borderWidth: 2,
+        })
+    }
 
     // Draw quote 
     for (let i = 0; i < quoteLinesNum; i++){
@@ -189,14 +189,21 @@ function splitText(text, font, textSize, parentWidth){
 }
 
 // Function to remove whitespace at the beginning and end of the quote and add doublequotes
-function formatText(text){
-    let formatedTextArr = text.trim().split("")
-    if (formatedTextArr[0] !== "\""){
-        formatedTextArr.unshift("\"")
+function formatQuote(text){
+    let formatedQuoteArr = text.trim().split("")
+    if (formatedQuoteArr[0] !== "\""){
+        formatedQuoteArr.unshift("\"")
     }
-    if (formatedTextArr[formatedTextArr.length - 1] !== "\""){
-        formatedTextArr.push("\"")
+    if (formatedQuoteArr[formatedQuoteArr.length - 1] !== "\""){
+        formatedQuoteArr.push("\"")
     }
 
-    return formatedTextArr.join("")
+    return formatedQuoteArr.join("")
+}
+
+// Function to remove whitespace at the beginning and end of the author
+function formatAuthor(text){
+    let author = text;
+    author.trim()
+    return author;
 }
