@@ -12,6 +12,7 @@ export function saveByteArray(name, byte) {
 export async function createPdf(backgroundColor, textColour, quote) {
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage(PageSizes.A4)
+    quote = formatText(quote)
 
     const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
     page.setFont(helveticaFont)
@@ -101,22 +102,22 @@ export async function createPdf(backgroundColor, textColour, quote) {
     const quoteBoxWidth = quoteBoxEndX - quoteBoxStartX;
 
     // Variables to draw a quote
-    let quoteTextHeight = 18
+    let quoteTextHeight = 14
     let quoteLines = splitText(quote, helveticaFont, quoteTextHeight, quoteBoxWidth)
     let quoteY = bigRectangleY - (littleSquareSize / 2) - quoteTextHeight
     let quoteLinesNum = 4;
 
-    // Draw rectangles for quote
-    for (let i = 0; i < quoteLinesNum; i++){
-        page.drawRectangle({
-            x: quoteBoxStartX,
-            y: quoteY - (i * quoteTextHeight),
-            width: quoteBoxWidth,
-            height: quoteTextHeight, 
-            borderColor: hexToRgb(textColour),
-            borderWidth: 2,
-        })
-    }
+    // // Draw rectangles for quote
+    // for (let i = 0; i < quoteLinesNum; i++){
+    //     page.drawRectangle({
+    //         x: quoteBoxStartX,
+    //         y: quoteY - (i * quoteTextHeight),
+    //         width: quoteBoxWidth,
+    //         height: quoteTextHeight, 
+    //         borderColor: hexToRgb(textColour),
+    //         borderWidth: 2,
+    //     })
+    // }
 
     // Draw quote 
     for (let i = 0; i < quoteLinesNum; i++){
@@ -185,4 +186,17 @@ function splitText(text, font, textSize, parentWidth){
 
     console.log(lines)
     return lines;
+}
+
+// Function to remove whitespace at the beginning and end of the quote and add doublequotes
+function formatText(text){
+    let formatedTextArr = text.trim().split("")
+    if (formatedTextArr[0] !== "\""){
+        formatedTextArr.unshift("\"")
+    }
+    if (formatedTextArr[formatedTextArr.length - 1] !== "\""){
+        formatedTextArr.push("\"")
+    }
+
+    return formatedTextArr.join("")
 }
