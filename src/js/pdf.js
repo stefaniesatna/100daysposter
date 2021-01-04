@@ -83,12 +83,10 @@ export async function createPdf(backgroundColor, textColour, quote) {
 
     //========
 
-    // For positioning in the centre of the document we need to get the width of the text
-
     // Draw title
     let titleTextHeight = 36;
     let titleTextWidth = helveticaFont.widthOfTextAtSize("100 days of code", titleTextHeight);
-    let titleX = (width - titleTextWidth) / 2
+    let titleX = centerText(titleTextWidth, width)
     let titleY = bigRectangleY + littleSquareSize * 10 + (titleTextHeight)
     page.drawText("100 days of code", {
         x: titleX,
@@ -97,12 +95,33 @@ export async function createPdf(backgroundColor, textColour, quote) {
         color: hexToRgb(textColour)
     });
 
-    // Draw quote
+    // Draw four quote illustrative rectangles
+    const quoteBoxStartX = bigRectangleX + littleSquareSize;
+    const quoteBoxEndX = bigRectangleX + littleSquareSize * 9;
+    const quoteBoxWidth = quoteBoxEndX - quoteBoxStartX;
+
+    // Variables to draw a quote
     let quoteTextHeight = 18
-    let quoteTextWidth = helveticaFont.widthOfTextAtSize(quote, quoteTextHeight);
-    let quoteX = (width - quoteTextWidth) / 2
+    let quoteLineOne = splitText(quote, helveticaFont, quoteTextHeight, quoteBoxWidth)
+
+    let quoteTextWidth = helveticaFont.widthOfTextAtSize(quoteLineOne, quoteTextHeight);
+    let quoteX = centerText(quoteTextWidth, width);
     let quoteY = bigRectangleY - (littleSquareSize / 2) - quoteTextHeight
-    page.drawText(quote, {
+
+    // Draw rectangles for quote
+    for (let i = 0; i < 4; i++){
+        page.drawRectangle({
+            x: quoteBoxStartX,
+            y: quoteY - (i * quoteTextHeight),
+            width: quoteBoxWidth,
+            height: quoteTextHeight, 
+            borderColor: hexToRgb(textColour),
+            borderWidth: 2,
+        })
+    }
+
+    // Draw quote 
+    page.drawText(quoteLineOne, {
         x: quoteX,
         y: quoteY,
         size: quoteTextHeight,
@@ -113,6 +132,7 @@ export async function createPdf(backgroundColor, textColour, quote) {
     return pdfBytes;
 }
 
+// Function to convert colours 
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 
@@ -121,4 +141,27 @@ function hexToRgb(hex) {
     let b = parseInt(result[3], 16)
 
     return rgb(r / 255, g / 255, b / 255)
+}
+
+// Function that returns X position for centered text given text width and parent width
+function centerText(textWidth, parentWidth){
+    let x = (parentWidth - textWidth) / 2
+    return x;
+}
+
+// Function to split text such that the quote wraps into multiple lines
+function splitText(text, font, textSize, parentWidth){
+    let str = text;
+    let textWidth = font.widthOfTextAtSize(str, textSize)
+    let lines = [];
+
+    while (textWidth > parentWidth){
+        let lastSpaceIndex = str.lastIndexOf(" ");
+        str = str.substring(0, lastSpaceIndex);
+        textWidth = font.widthOfTextAtSize(str, textSize);
+    }
+
+    lines.push(str)
+
+    return str;
 }

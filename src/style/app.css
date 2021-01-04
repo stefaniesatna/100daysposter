@@ -74,7 +74,7 @@ body {
                 }
 
             .custom-colour-code-box{
-                flex: 1;
+                flex: 2;
                 background-color: pink;
                 border-radius: 8px;
                 padding: 1.5em;
@@ -95,11 +95,16 @@ body {
                 }
 
         .quote{
+            display: flex;
+            flex-direction: column;
             background-color: #fffbff;
             border-radius: 8px;
             grid-row-start: 5;
             grid-row-end: 6;
+            padding: 1.5em;
+
         }
+            .quote-label {}
 
         .download {
             background-color: #FF0AC2;
