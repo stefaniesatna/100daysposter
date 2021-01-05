@@ -13,9 +13,10 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor)
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage(PageSizes.A4)
     quote = formatQuote(quote)
+    quoteAuthor = formatAuthor(quoteAuthor)
 
-    const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
-    page.setFont(helveticaFont)
+    const font = await pdfDoc.embedFont(StandardFonts.Courier)
+    page.setFont(font)
 
     const { width, height } = page.getSize();
 
@@ -68,8 +69,8 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor)
             // Draw numbers in the middle of the little squares
             let number = (10 * i + j + 1).toString();
             let numberSize = 18;
-            let numberWidth = helveticaFont.widthOfTextAtSize(number, numberSize);
-            let numberHeight = helveticaFont.heightAtSize(numberSize) - 6
+            let numberWidth = font.widthOfTextAtSize(number, numberSize);
+            let numberHeight = font.heightAtSize(numberSize) - 6
             let numberX = littleSquareX + (littleSquareSize / 2) - (numberWidth / 2);
             let numberY = littleSquareY + (littleSquareSize / 2) - (numberHeight / 2);
 
@@ -86,7 +87,7 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor)
 
     // Draw title
     let titleTextHeight = 36;
-    let titleTextWidth = helveticaFont.widthOfTextAtSize("100 days of code", titleTextHeight);
+    let titleTextWidth = font.widthOfTextAtSize("100 days of code", titleTextHeight);
     let titleX = centerText(titleTextWidth, width)
     let titleY = bigRectangleY + littleSquareSize * 10 + (titleTextHeight)
     page.drawText("100 days of code", {
@@ -103,25 +104,25 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor)
 
     // Variables to draw a quote
     let quoteTextHeight = 14
-    let quoteLines = splitText(quote, helveticaFont, quoteTextHeight, quoteBoxWidth)
-    let quoteY = bigRectangleY - (littleSquareSize / 2) - quoteTextHeight
     let quoteLinesNum = 4;
+    let quoteLines = splitText(quote, font, quoteTextHeight, quoteBoxWidth, quoteLinesNum)
+    let quoteY = bigRectangleY - (littleSquareSize / 2) - quoteTextHeight
 
     // Draw rectangles for quote
-    for (let i = 0; i < quoteLinesNum; i++){
-        page.drawRectangle({
-            x: quoteBoxStartX,
-            y: quoteY - (i * quoteTextHeight),
-            width: quoteBoxWidth,
-            height: quoteTextHeight, 
-            borderColor: hexToRgb(textColour),
-            borderWidth: 2,
-        })
-    }
+    // for (let i = 0; i < quoteLinesNum; i++){
+    //     page.drawRectangle({
+    //         x: quoteBoxStartX,
+    //         y: quoteY - (i * quoteTextHeight),
+    //         width: quoteBoxWidth,
+    //         height: quoteTextHeight, 
+    //         borderColor: hexToRgb(textColour),
+    //         borderWidth: 2,
+    //     })
+    // }
 
     // Draw quote 
-    for (let i = 0; i < quoteLinesNum; i++){
-        let quoteTextWidth = helveticaFont.widthOfTextAtSize(quoteLines[i], quoteTextHeight);
+    for (let i = 0; i < quoteLines.length; i++){
+        let quoteTextWidth = font.widthOfTextAtSize(quoteLines[i], quoteTextHeight);
         let quoteX = centerText(quoteTextWidth, width);
 
         page.drawText(quoteLines[i], {
@@ -131,6 +132,19 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor)
             color: hexToRgb(textColour)
         });
     }
+
+    // Draw author
+    let authorTextHeight = 12
+    let authorTextWidth = font.widthOfTextAtSize(quoteAuthor, authorTextHeight)
+    let authorX = centerText(authorTextWidth, width)
+    let authorY = quoteY - (quoteLines.length * quoteTextHeight) - (quoteTextHeight / 2);
+
+    page.drawText(quoteAuthor, {
+        x: authorX,
+        y: authorY,
+        size: authorTextHeight,
+        color: hexToRgb(textColour),
+    })
 
     const pdfBytes = await pdfDoc.save()
     return pdfBytes;
@@ -154,12 +168,12 @@ function centerText(textWidth, parentWidth){
 }
 
 // Function to split text such that the quote wraps into multiple lines
-function splitText(text, font, textSize, parentWidth){
+function splitText(text, font, textSize, parentWidth, quoteLinesNum){
     let lines = [];
     let str = text;
     
 
-    for (let i = 0; i < 4; i++){
+    for (let i = 0; i < quoteLinesNum; i++){
         // Initialize / reinitialize remaining string
         let cutOffStr = ""
         let textWidth = font.widthOfTextAtSize(str, textSize)
@@ -184,7 +198,9 @@ function splitText(text, font, textSize, parentWidth){
 
     }
 
-    console.log(lines)
+    // Remove empty lines
+    lines = lines.filter(line => line)
+
     return lines;
 }
 
