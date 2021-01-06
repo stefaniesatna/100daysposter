@@ -84,6 +84,6 @@ function sizeSelected(){
 
 //--------Download
 async function downloadButtonClicked(){
-    const pdfBytes = await createPdf(backgroundColourSelected(), textColourSelected(), quoteSelected(), quoteAuthorSelected());
+    const pdfBytes = await createPdf(backgroundColourSelected(), textColourSelected(), quoteSelected(), quoteAuthorSelected(), sizeSelected());
     saveByteArray("poster.pdf", pdfBytes);
 }

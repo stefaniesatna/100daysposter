@@ -9,16 +9,28 @@ export function saveByteArray(name, byte) {
     link.click();
 };
 
-export async function createPdf(backgroundColor, textColour, quote, quoteAuthor) {
+export async function createPdf(backgroundColor, textColour, quote, quoteAuthor, pageSize) {
     const pdfDoc = await PDFDocument.create();
-    const page = pdfDoc.addPage(PageSizes.A4)
+    const page = pdfDoc.addPage(PageSizes[pageSize])
     quote = formatQuote(quote)
     quoteAuthor = formatAuthor(quoteAuthor)
+
+    const { width, height } = page.getSize();
+
+    // Font and font sizes
+    const boldFont = await pdfDoc.embedFont(StandardFonts.CourierBold)
+    page.setFont(boldFont)
 
     const font = await pdfDoc.embedFont(StandardFonts.Courier)
     page.setFont(font)
 
-    const { width, height } = page.getSize();
+    const titleTextHeight = 0.043 * height;
+    const numberSize = 0.021 * height;
+    const quoteTextHeight = 0.017 * height;
+    const authorTextHeight = 0.014 * height;
+    const borderWidth = 0.001 * height;
+    const quoteLinesNum = 4;
+    console.log(height)
 
 
     // Draw a rectangle covering the whole page to set the background colour
@@ -42,7 +54,7 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor)
         width: squareSize,
         height: squareSize,
         borderColor: hexToRgb(textColour),
-        borderWidth: 2,
+        borderWidth: 2 * borderWidth,
     })
 
     // Draw a grid of numbers 1-100
@@ -63,12 +75,11 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor)
                 width: squareSize / 10,
                 height: squareSize / 10, 
                 borderColor: hexToRgb(textColour),
-                borderWidth: 2,
+                borderWidth: borderWidth,
             })
 
             // Draw numbers in the middle of the little squares
             let number = (10 * i + j + 1).toString();
-            let numberSize = 18;
             let numberWidth = font.widthOfTextAtSize(number, numberSize);
             let numberHeight = font.heightAtSize(numberSize) - 6
             let numberX = littleSquareX + (littleSquareSize / 2) - (numberWidth / 2);
@@ -78,7 +89,8 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor)
                 x: numberX + posDifX,
                 y: numberY + posDifY,
                 size: numberSize,
-                color: hexToRgb(textColour)
+                color: hexToRgb(textColour),
+                font: font
             });
         }
     }
@@ -86,15 +98,15 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor)
     //========
 
     // Draw title
-    let titleTextHeight = 36;
-    let titleTextWidth = font.widthOfTextAtSize("100 days of code", titleTextHeight);
+    let titleTextWidth = boldFont.widthOfTextAtSize("100 DAYS OF CODE", titleTextHeight);
     let titleX = centerText(titleTextWidth, width)
     let titleY = bigRectangleY + littleSquareSize * 10 + (titleTextHeight)
-    page.drawText("100 days of code", {
+    page.drawText("100 DAYS OF CODE", {
         x: titleX,
         y: titleY,
         size: titleTextHeight,
-        color: hexToRgb(textColour)
+        color: hexToRgb(textColour),
+        font: boldFont
     });
 
     // Draw four quote illustrative rectangles
@@ -103,9 +115,7 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor)
     const quoteBoxWidth = quoteBoxEndX - quoteBoxStartX;
 
     // Variables to draw a quote
-    let quoteTextHeight = 14
-    let quoteLinesNum = 4;
-    let quoteLines = splitText(quote, font, quoteTextHeight, quoteBoxWidth, quoteLinesNum)
+    let quoteLines = splitText(quote, boldFont, quoteTextHeight, quoteBoxWidth, quoteLinesNum)
     let quoteY = bigRectangleY - (littleSquareSize / 2) - quoteTextHeight
 
     // Draw rectangles for quote
@@ -122,20 +132,20 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor)
 
     // Draw quote 
     for (let i = 0; i < quoteLines.length; i++){
-        let quoteTextWidth = font.widthOfTextAtSize(quoteLines[i], quoteTextHeight);
+        let quoteTextWidth = boldFont.widthOfTextAtSize(quoteLines[i], quoteTextHeight);
         let quoteX = centerText(quoteTextWidth, width);
 
         page.drawText(quoteLines[i], {
             x: quoteX,
             y: quoteY - (i * quoteTextHeight),
             size: quoteTextHeight,
-            color: hexToRgb(textColour)
+            color: hexToRgb(textColour),
+            font: boldFont
         });
     }
 
     // Draw author
-    let authorTextHeight = 12
-    let authorTextWidth = font.widthOfTextAtSize(quoteAuthor, authorTextHeight)
+    let authorTextWidth = boldFont.widthOfTextAtSize(quoteAuthor, authorTextHeight)
     let authorX = centerText(authorTextWidth, width)
     let authorY = quoteY - (quoteLines.length * quoteTextHeight) - (quoteTextHeight / 2);
 
