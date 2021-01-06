@@ -118,3 +118,25 @@ body {
             
         }
 
+.poster {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}
+
+.poster-quote {
+    left: 21%;
+    width: 58%;
+    position: relative;
+    bottom: 19.5%;
+    font-size: 10pt;
+    font-family: 'Courier';
+    text-align: center;
+    font-weight: 600;
+}
+
+.poster-quote .author {
+    display: inline-block;
+    font-weight: 300;
+    padding-top: 8px;
+}
