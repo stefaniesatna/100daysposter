@@ -30,8 +30,6 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor,
     const authorTextHeight = 0.014 * height;
     const borderWidth = 0.001 * height;
     const quoteLinesNum = 4;
-    console.log(height)
-
 
     // Draw a rectangle covering the whole page to set the background colour
     page.drawRectangle({
@@ -158,6 +156,7 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor,
 
     const pdfBytes = await pdfDoc.save()
     return pdfBytes;
+
 }
 
 // Function to convert colours 
@@ -217,11 +216,14 @@ function splitText(text, font, textSize, parentWidth, quoteLinesNum){
 // Function to remove whitespace at the beginning and end of the quote and add doublequotes
 function formatQuote(text){
     let formatedQuoteArr = text.trim().split("")
-    if (formatedQuoteArr[0] !== "\""){
-        formatedQuoteArr.unshift("\"")
-    }
-    if (formatedQuoteArr[formatedQuoteArr.length - 1] !== "\""){
-        formatedQuoteArr.push("\"")
+
+    if (formatedQuoteArr.length > 0){
+        if (formatedQuoteArr[0] !== "\""){
+            formatedQuoteArr.unshift("\"")
+        }
+        if (formatedQuoteArr[formatedQuoteArr.length - 1] !== "\""){
+            formatedQuoteArr.push("\"")
+        }
     }
 
     return formatedQuoteArr.join("")
