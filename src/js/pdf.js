@@ -214,7 +214,7 @@ function splitText(text, font, textSize, parentWidth, quoteLinesNum){
 }
 
 // Function to remove whitespace at the beginning and end of the quote and add doublequotes
-function formatQuote(text){
+export function formatQuote(text){
     let formatedQuoteArr = text.trim().split("")
 
     if (formatedQuoteArr.length > 0){

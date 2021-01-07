@@ -1,4 +1,4 @@
-import {saveByteArray, createPdf} from './pdf'
+import {saveByteArray, createPdf, formatQuote} from './pdf'
 
 const backgroundColour = [
     document.getElementById("background-colour-white"),
@@ -21,6 +21,10 @@ for (let i = 0; i < textColour.length; i++){
 }
 
 const quote = document.getElementById("quote");
+quote.addEventListener("keyup", updatePreviewQuoteText)
+quote.addEventListener("change", updatePreviewQuoteText)
+quote.addEventListener("paste", updatePreviewQuoteText)
+
 
 // TODO
 
@@ -29,6 +33,8 @@ const quote = document.getElementById("quote");
 // quoteLength.innerHTML = `${quote.value.length}/175`
 
 const quoteAuthor = document.getElementById("quoteAuthor")
+quoteAuthor.addEventListener("keyup", updatePreviewAuthorText)
+quoteAuthor.addEventListener("change", updatePreviewAuthorText)
 
 const size = [
     document.getElementById("a4"),
@@ -104,6 +110,7 @@ function updatePreviewBackgroundColour(){
 
 function updatePreviewTextColour(){
     document.getElementById("poster-quote").style.color = textColourSelected()
+    document.getElementById("author").style.color = textColourSelected()
 
     let paths = document.getElementsByTagName("path")
     for (let path of paths) {
@@ -114,6 +121,14 @@ function updatePreviewTextColour(){
     for (let t of text) {
         t.setAttribute("fill", textColourSelected())
     }
+}
+
+function updatePreviewQuoteText(){
+    document.getElementById("poster-quote").textContent = formatQuote(quoteSelected())
+}
+
+function updatePreviewAuthorText(){
+    document.getElementById("author").textContent = quoteAuthorSelected()
 }
 
 //--------Download
