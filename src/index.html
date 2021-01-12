@@ -734,62 +734,61 @@
 
             </div>
             <div class="customise">
-                <div class="box-preselected-colours">
+                <div class="box box-preselected-colours">
+                    <label class="preselected-colour white" for="background-colour-white"></label>
+                    <input type="radio" id="background-colour-white" name="background-colour" value="#ffffff" checked>
+
+                    <label class="preselected-colour black" for="background-colour-black"></label>
+                    <input type="radio" id="background-colour-black" name="background-colour" value="#000000">
+
+                    <label class="preselected-colour pink" for="background-colour-pink"></label>
+                    <input type="radio" id="background-colour-pink" name="background-colour" value="#fad4d8">
+
+                    <label class="preselected-colour purple" for="background-colour-purple"></label>
+                    <input type="radio" id="background-colour-purple" name="background-colour" value="#542344">
+
+                    <label class="preselected-colour yellow" for="background-colour-yellow"></label>
+                    <input type="radio" id="background-colour-yellow" name="background-colour" value="#ecd444">
+
+                    <label class="preselected-colour grey" for="background-colour-grey"></label>
+                    <input type="radio" id="background-colour-grey" name="background-colour" value="#7d7c7a">
                     <div>
-                        <input type="radio" id="background-colour-white" name="background-colour" value="#ffffff" checked>
-                        <label for="background-colour-white">White</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="background-colour-black" name="background-colour" value="#000000">
-                        <label for="background-colour-black">Black</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="background-colour-green" name="background-colour" value="#00ff00">
-                        <label for="background-colour-green">Green</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="background-colour-orange" name="background-colour" value="#ffa500">
-                        <label for="background-colour-orange">Orange</label>
-                    </div>
-                    <div>
-                        <label for="colour-code">Or enter colour code</label>
                         <input type="text" id="colour-code">
                     </div>
                 </div>
-                <div class="box-text-colours">
+                <div class="box box-text-colours">
                     <div>
                         <input type="radio" id="dark" name="text-colour" checked value="#000000">
-                        <label for="dark">Dark</label>
                     </div>
                     <div>
                         <input type="radio" id="light" name="text-colour" value="#ffffff">
-                        <label for="light">Light</label>
                     </div>
                 </div>
-                <div class="box-nerd">
+                <!--TOD0: wire up the nerd checkbox-->
+                <div class="box box-nerd">
                     <input type="checkbox" id="nerd">
                 </div>
                 <!--TOD0: wire up the activity input-->
-                <div class="box-activity-input">
+                <div class="box box-activity-input">
                     <textarea id="activity">CODE</textarea>
                 </div>
-                <div class="box-size-european">
+                <div class="box box-size-european">
                     <label for="A4">
                         A4
                     </label>
                     <input type="radio" id="a4" name="size" checked value="a4" />
                 </div>
-                <div class="box-size-american">
+                <div class="box box-size-american">
                     <label for="Letter">
                         Letter
                     </label>
                     <input type="radio" id="a3" name="size" value="Letter" />
                 </div>
-                <div class="box-quote-input">
+                <div class="box box-quote-input">
                     <textarea id="quote" maxlength="150">Every great wizard in history has started out as nothing more than we are now: students. If they can do it why not us?</textarea>
                     <p id="quoteLength">150</p>
                 </div>
-                <div class="box-author-input">
+                <div class="box box-author-input">
                     <textarea id="quoteAuthor">Harry Potter</textarea>
                 </div>
             </div>

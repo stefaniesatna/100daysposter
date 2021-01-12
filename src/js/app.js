@@ -3,8 +3,10 @@ import {saveByteArray, createPdf, formatQuote} from './pdf'
 const backgroundColour = [
     document.getElementById("background-colour-white"),
     document.getElementById("background-colour-black"),
-    document.getElementById("background-colour-orange"),
-    document.getElementById("background-colour-green"), 
+    document.getElementById("background-colour-pink"),
+    document.getElementById("background-colour-purple"),
+    document.getElementById("background-colour-yellow"),
+    document.getElementById("background-colour-grey"), 
 ];
 const customBackgroundColour = document.getElementById("colour-code");
 customBackgroundColour.addEventListener("input", customBackgroundColourChanged);
