@@ -96,7 +96,7 @@ h1 {
                 grid-column-end: 3;
 
                 display: grid;
-                padding: 2em;
+                padding: 4em 2em 2em 2em;
                 grid-gap: 10px;
                 grid-template-rows: 1fr 1fr 3fr 1fr;
                 grid-template-columns: 3fr 1fr 1fr 1fr;
@@ -108,12 +108,20 @@ h1 {
                     grid-row-start: 1;
                     grid-row-end: 2;
                     grid-column-start: 1;
-                    grid-column-end: 4;
+                    grid-column-end: 3;
 
                     background-color: #ebb733;
                 }
 
                 .box-text-colours{
+                    grid-row-start: 1;
+                    grid-row-end: 2;
+                    grid-column-start: 3;
+                    grid-column-end: 4;
+
+                    background-color: #ebb733;
+                }
+                .box-nerd{
                     grid-row-start: 1;
                     grid-row-end: 2;
                     grid-column-start: 4;
