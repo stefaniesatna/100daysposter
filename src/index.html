@@ -11,7 +11,10 @@
 <body>
     <div class="container">
         <!--TODO: create title animation-->
-        <h1>100 DAYS OF CO|</h1>
+        <h1>
+            100 DAYS OF
+            <span id="typeEffect">CODE</span>
+        </h1>
         <div class="main-grid">
             <div class="poster-preview">
                 <svg id="poster" class="poster" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
@@ -793,6 +796,30 @@
                 </div>
             </div>
             <button id="download" class="download">GET YOUR POSTER</button>
+            <script src="../node_modules/typeit/dist/typeit.min.js"></script>
+            <script>
+                const activities = ["CODE", "EXERCISE", "READING", "FAMILY", "JUMPING"]
+                let instance = new TypeIt('#typeEffect', {
+                    deleteSpeed: 100,
+                    lifeLike: false,
+                    startDelay: 250,
+                    afterComplete: function (step, instance) {
+                        instance.destroy();
+                    }
+                })
+                    .pause(1000)
+                    .delete(activities[0].length)
+                    .type(activities[1], {delay: 1000})
+                    .delete(activities[1].length)
+                    .type(activities[2], {delay: 1000})
+                    .delete(activities[2].length)
+                    .type(activities[3], {delay: 1000})
+                    .delete(activities[3].length)
+                    .type(activities[4], {delay: 1000})
+                    .delete(activities[4].length)
+                    .type(activities[0])
+                    .go();
+            </script>
             <script src="./js/app.js" type="application/javascript"></script>
         </div>
     </div>

@@ -9,9 +9,10 @@
     "start": "parcel src/index.html"
   },
   "dependencies": {
-    "pdf-lib": "^1.13.0"
+    "pdf-lib": "^1.13.0",
+    "typeit": "^7.0.4"
   },
   "browserslist": [
     "since 2017-06"
-  ]  
+  ]
 }
