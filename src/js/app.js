@@ -22,6 +22,11 @@ for (let i = 0; i < textColour.length; i++){
     textColour[i].addEventListener("change", textColourChanged);
 }
 
+const activity = document.getElementById("activity");
+activity.addEventListener("keyup", updatePreviewTitleText)
+activity.addEventListener("change", updatePreviewTitleText)
+activity.addEventListener("paste", updatePreviewTitleText)
+
 const quote = document.getElementById("quote");
 quote.addEventListener("keyup", updatePreviewQuoteText)
 quote.addEventListener("change", updatePreviewQuoteText)
@@ -90,6 +95,10 @@ function textColourSelected(){
     }
 }
 
+function activitySelected(){
+    return activity.value;
+}
+
 function quoteSelected(){
     return quote.value;
 }
@@ -123,6 +132,10 @@ function updatePreviewTextColour(){
     for (let t of text) {
         t.setAttribute("fill", textColourSelected())
     }
+}
+
+function updatePreviewTitleText(){
+    document.getElementById("poster-title").textContent = "100 DAYS OF " + activitySelected()
 }
 
 function updatePreviewQuoteText(){
