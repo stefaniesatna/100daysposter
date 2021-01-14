@@ -18,6 +18,13 @@ h1 {
     margin: 0 -2em 0.2em -2em;
 }
 
+textarea {
+    outline: none;
+    resize: none;
+    border-style: none;
+    font-size: 2em;
+}
+
 #typeEffect {
 }
 
@@ -129,8 +136,9 @@ h1 {
                 box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.25);
             }
                 .box {
-                    padding: 1em 0.5em 1em 0.5em;
+                    padding: 0.5em 0.5em 0.5em 0.5em;
                     display: flex;
+                    align-items: center;
                 }
 
                 .box input[type="radio"] {
@@ -235,7 +243,27 @@ h1 {
                     background-color: #ffffff;
                     border-style: dashed;
                     border-width: 2px;
+
+                    display: flex;
+                    flex-direction: column;
+                    align-items: stretch;
+                    justify-content: flex-end;
+
+                    border-style: solid;
+                    border-color: blue;
                 }
+                    #quote {
+                        border-style: solid;
+                        border-color: green;
+                        border-width: 3px;
+                        flex-grow: 1;
+                    }
+
+                    #quoteLength {
+                        border-style: solid;
+                        border-color: red;
+                        margin: 0;
+                    }
 
                 .box-author-input{
                     grid-row-start: 4;
