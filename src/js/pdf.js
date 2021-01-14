@@ -10,6 +10,7 @@ export function saveByteArray(name, byte) {
 };
 
 export async function createPdf(backgroundColor, textColour, activity, quote, quoteAuthor, pageSize) {
+
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage(PageSizes[pageSize])
 
@@ -99,16 +100,13 @@ export async function createPdf(backgroundColor, textColour, activity, quote, qu
 
     //========
 
-    // Draw four quote illustrative rectangles
     const quoteBoxStartX = bigRectangleX + littleSquareSize;
     const quoteBoxEndX = bigRectangleX + littleSquareSize * 9;
     const quoteBoxWidth = quoteBoxEndX - quoteBoxStartX;
 
-    //DRAW TITLE
-
-    // Variables to draw a title
+    // Draw title
     let titleLines = splitText(title, boldFont, titleTextHeight, squareSize, titleLinesNum)
-    let titleY = bigRectangleY + littleSquareSize * (10 + titleLines.length - 1.5) + (titleTextHeight)
+    let titleY = titleLines.length === 1 ? bigRectangleY + littleSquareSize * (10) + (titleTextHeight) : bigRectangleY + littleSquareSize * (10 + titleLines.length - 1.5) + (titleTextHeight)
 
     for (let i = 0; i < titleLines.length; i++){
         let titleTextWidth = boldFont.widthOfTextAtSize(titleLines[i], titleTextHeight);
@@ -123,11 +121,10 @@ export async function createPdf(backgroundColor, textColour, activity, quote, qu
         });
     }
 
-    // Variables to draw a quote
+    // Draw quote
     let quoteLines = splitText(quote, boldFont, quoteTextHeight, quoteBoxWidth, quoteLinesNum)
     let quoteY = bigRectangleY - (littleSquareSize / 2) - quoteTextHeight
 
-    // Draw quote 
     for (let i = 0; i < quoteLines.length; i++){
         let quoteTextWidth = boldFont.widthOfTextAtSize(quoteLines[i], quoteTextHeight);
         let quoteX = centerText(quoteTextWidth, width);
@@ -141,18 +138,6 @@ export async function createPdf(backgroundColor, textColour, activity, quote, qu
         });
     }
 
-    // Draw rectangles for quote
-    // for (let i = 0; i < quoteLinesNum; i++){
-    //     page.drawRectangle({
-    //         x: quoteBoxStartX,
-    //         y: quoteY - (i * quoteTextHeight),
-    //         width: quoteBoxWidth,
-    //         height: quoteTextHeight, 
-    //         borderColor: hexToRgb(textColour),
-    //         borderWidth: 2,
-    //     })
-    // }
-
     // Draw author
     let authorTextWidth = boldFont.widthOfTextAtSize(quoteAuthor, authorTextHeight)
     let authorX = centerText(authorTextWidth, width)
@@ -164,6 +149,16 @@ export async function createPdf(backgroundColor, textColour, activity, quote, qu
         size: authorTextHeight,
         color: hexToRgb(textColour),
     })
+
+    // Calculate max number of characters - careful, these are hard-coded in html
+    const maxCharsTitle = maxChars(boldFont, titleTextHeight, squareSize, titleLinesNum)
+    console.log("Max characters in a title: ", maxCharsTitle)
+
+    const maxCharsQuote = maxChars(boldFont, quoteTextHeight, quoteBoxWidth, quoteLinesNum)
+    console.log("Max characters in a quote: ", maxCharsQuote)
+
+    const maxCharsAuthor = maxChars(boldFont, authorTextHeight, quoteBoxWidth, 1)
+    console.log("Max characters in an author: ", maxCharsAuthor)
 
     const pdfBytes = await pdfDoc.save()
     return pdfBytes;
@@ -245,4 +240,12 @@ function formatAuthor(text){
     let author = text;
     author.trim()
     return author;
+}
+
+// Function to calculate max number of characters (on monospaced font)
+function maxChars(font, fontSize, parentWidth, numOfLines){
+    const charWidth = font.widthOfTextAtSize("a", fontSize)
+    const numOfChars = Math.floor((parentWidth * numOfLines) / charWidth)
+
+    return numOfChars
 }
