@@ -148,7 +148,7 @@ function updatePreviewAuthorText(){
 
 //--------Download
 async function downloadButtonClicked(){
-    const pdfBytes = await createPdf(backgroundColourSelected(), textColourSelected(), quoteSelected(), quoteAuthorSelected(), sizeSelected());
+    const pdfBytes = await createPdf(backgroundColourSelected(), textColourSelected(), activitySelected(), quoteSelected(), quoteAuthorSelected(), sizeSelected());
     saveByteArray("poster.pdf", pdfBytes);
 }
 

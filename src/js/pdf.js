@@ -1,4 +1,4 @@
-import { PDFDocument, StandardFonts, rgb, degrees, grayscale, PageSizes, drawLine } from 'pdf-lib'
+import { PDFDocument, StandardFonts, rgb, degrees, grayscale, PageSizes, drawLine, square } from 'pdf-lib'
 
 export function saveByteArray(name, byte) {
     var blob = new Blob([byte], { type: "application/pdf" });
@@ -9,9 +9,12 @@ export function saveByteArray(name, byte) {
     link.click();
 };
 
-export async function createPdf(backgroundColor, textColour, quote, quoteAuthor, pageSize) {
+export async function createPdf(backgroundColor, textColour, activity, quote, quoteAuthor, pageSize) {
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage(PageSizes[pageSize])
+
+    let title = "100 DAYS OF " + activity.toUpperCase()
+    console.log(title)
     quote = formatQuote(quote)
     quoteAuthor = formatAuthor(quoteAuthor)
 
@@ -29,6 +32,7 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor,
     const quoteTextHeight = 0.017 * height;
     const authorTextHeight = 0.014 * height;
     const borderWidth = 0.001 * height;
+    const titleLinesNum = 2
     const quoteLinesNum = 4;
 
     // Draw a rectangle covering the whole page to set the background colour
@@ -95,38 +99,33 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor,
 
     //========
 
-    // Draw title
-    let titleTextWidth = boldFont.widthOfTextAtSize("100 DAYS OF CODE", titleTextHeight);
-    let titleX = centerText(titleTextWidth, width)
-    let titleY = bigRectangleY + littleSquareSize * 10 + (titleTextHeight)
-    page.drawText("100 DAYS OF CODE", {
-        x: titleX,
-        y: titleY,
-        size: titleTextHeight,
-        color: hexToRgb(textColour),
-        font: boldFont
-    });
-
     // Draw four quote illustrative rectangles
     const quoteBoxStartX = bigRectangleX + littleSquareSize;
     const quoteBoxEndX = bigRectangleX + littleSquareSize * 9;
     const quoteBoxWidth = quoteBoxEndX - quoteBoxStartX;
 
+    //DRAW TITLE
+
+    // Variables to draw a title
+    let titleLines = splitText(title, boldFont, titleTextHeight, squareSize, titleLinesNum)
+    let titleY = bigRectangleY + littleSquareSize * (10 + titleLines.length - 1.5) + (titleTextHeight)
+
+    for (let i = 0; i < titleLines.length; i++){
+        let titleTextWidth = boldFont.widthOfTextAtSize(titleLines[i], titleTextHeight);
+        let titleX = centerText(titleTextWidth, width)
+
+        page.drawText(titleLines[i], {
+            x: titleX,
+            y: titleY - (i * titleTextHeight),
+            size: titleTextHeight,
+            color: hexToRgb(textColour),
+            font: boldFont
+        });
+    }
+
     // Variables to draw a quote
     let quoteLines = splitText(quote, boldFont, quoteTextHeight, quoteBoxWidth, quoteLinesNum)
     let quoteY = bigRectangleY - (littleSquareSize / 2) - quoteTextHeight
-
-    // Draw rectangles for quote
-    // for (let i = 0; i < quoteLinesNum; i++){
-    //     page.drawRectangle({
-    //         x: quoteBoxStartX,
-    //         y: quoteY - (i * quoteTextHeight),
-    //         width: quoteBoxWidth,
-    //         height: quoteTextHeight, 
-    //         borderColor: hexToRgb(textColour),
-    //         borderWidth: 2,
-    //     })
-    // }
 
     // Draw quote 
     for (let i = 0; i < quoteLines.length; i++){
@@ -141,6 +140,18 @@ export async function createPdf(backgroundColor, textColour, quote, quoteAuthor,
             font: boldFont
         });
     }
+
+    // Draw rectangles for quote
+    // for (let i = 0; i < quoteLinesNum; i++){
+    //     page.drawRectangle({
+    //         x: quoteBoxStartX,
+    //         y: quoteY - (i * quoteTextHeight),
+    //         width: quoteBoxWidth,
+    //         height: quoteTextHeight, 
+    //         borderColor: hexToRgb(textColour),
+    //         borderWidth: 2,
+    //     })
+    // }
 
     // Draw author
     let authorTextWidth = boldFont.widthOfTextAtSize(quoteAuthor, authorTextHeight)

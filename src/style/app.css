@@ -78,13 +78,12 @@ h1 {
                     left: 12.5%
 
                 }
-                /*PT did this, have another look*/
                 .poster-title {
-
                     align-items: center;
                     text-align: center;
                     font-size: 20pt;
                     font-weight: 600;
+                    text-transform: uppercase;
 
                     overflow-wrap: break-word;
                 }
