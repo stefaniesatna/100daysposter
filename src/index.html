@@ -759,27 +759,27 @@
                     </div>
                 </div>
                 <div class="box box-text-colours">
-                    <div>
-                        <input type="radio" id="dark" name="text-colour" checked value="#000000">
-                    </div>
-                    <div>
-                        <input type="radio" id="light" name="text-colour" value="#ffffff">
-                    </div>
+                    <input type="radio" id="dark" name="text-colour" checked value="#000000">
+                    <label class="preselected-colour black" for="dark"></label>
+
+                    <input type="radio" id="light" name="text-colour" value="#ffffff">
+                    <label class="preselected-colour-text white" for="light"></label>
                 </div>
                 <!--TOD0: wire up the nerd checkbox-->
                 <div class="box box-nerd">
                     <input type="checkbox" id="nerd">
+                    <label class="box box-nerd"></label>
                 </div>
                 <input class="box box-activity-input" type="text" autofocus id="activity" maxlength="43" value="CODE" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value"/>
                 <div class="box box-size-european">
                     <label for="A4">
-                        A4
+                        A4-A0
                     </label>
                     <input type="radio" id="a4" name="size" checked value="a4" />
                 </div>
                 <div class="box box-size-american">
                     <label for="Letter">
-                        Letter
+                        Letter-ANSI E
                     </label>
                     <input type="radio" id="a3" name="size" value="Letter" />
                 </div>
