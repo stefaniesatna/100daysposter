@@ -9,6 +9,7 @@ button {
 body {
     background-color: #ebb733;
     font-family: 'Courier Prime', monospace;
+    font-size: 18px;
 }
 
 h1 {
@@ -16,13 +17,6 @@ h1 {
     font-size: 6em;
     padding: 0;
     margin: 0 -2em 0.2em -2em;
-}
-
-textarea {
-    outline: none;
-    resize: none;
-    border-style: none;
-    font-size: 2em;
 }
 
 #typeEffect {
@@ -187,7 +181,21 @@ textarea {
                         .grey{
                             background-color: #7d7c7a;
                         }
+                    
+                    .colour-code {
+                        font-size: inherit;
+                        font-family: inherit;
+                        border-color: #000000;
+                        border-style: solid;
 
+                        caret-color: #ebb733;
+
+                        outline: none;
+                        resize: none;
+                    }
+                        .colour-code:focus {
+                            border-width: 6px;
+                        }
 
 
                 .box-text-colours{
@@ -214,9 +222,20 @@ textarea {
                     grid-column-end: 2;
 
                     background-color: #ffffff;
+                    border-color: #000000;
                     border-style: dashed;
                     border-width: 2px;
+
+                    outline: none;
+                    resize: none;
+                    font-family: inherit;
+                    font-size: 1.25em;
+                    caret-color: #ebb733;
                 }
+
+                    .box-activity-input:focus{
+                        border-color: #ebb733
+                    }
 
                 .box-size-european{
                     background-color: #ebb733;
@@ -241,28 +260,32 @@ textarea {
                     grid-column-end: 5;
 
                     background-color: #ffffff;
-                    border-style: dashed;
-                    border-width: 2px;
 
                     display: flex;
                     flex-direction: column;
                     align-items: stretch;
                     justify-content: flex-end;
-
-                    border-style: solid;
-                    border-color: blue;
+                    margin: 0 0 0.5em 0;
                 }
                     #quote {
-                        border-style: solid;
-                        border-color: green;
-                        border-width: 3px;
                         flex-grow: 1;
+                        outline: none;
+                        resize: none;
+                        font-family: inherit;
+                        font-size: 1.25em;
+                        caret-color: #ebb733;
+
+                        border-style: dashed;
+                        border-color: #000000;
+                        border-width: 2px;
+                    }
+
+                    #quote:focus{
+                        border-color: #ebb733;
                     }
 
                     #quoteLength {
-                        border-style: solid;
-                        border-color: red;
-                        margin: 0;
+                        margin: -1.5em 0.5em 0 auto;
                     }
 
                 .box-author-input{
@@ -274,6 +297,17 @@ textarea {
                     background-color: #ffffff;
                     border-style: dashed;
                     border-width: 2px;
+                    border-color: #000000;
+
+                    outline: none;
+                    resize: none;
+                    font-family: inherit;
+                    font-size: 1.25em;
+                    caret-color: #ebb733;
+                }
+
+                .box-author-input:focus{
+                    border-color: #ebb733;
                 }
 
             .download {

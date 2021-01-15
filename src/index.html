@@ -755,7 +755,7 @@
                     <label class="preselected-colour grey" for="background-colour-grey"></label>
                     <input type="radio" id="background-colour-grey" name="background-colour" value="#7d7c7a">
                     <div>
-                        <input type="text" id="colour-code">
+                        <input class="colour-code" type="text" id="colour-code">
                     </div>
                 </div>
                 <div class="box box-text-colours">
@@ -770,9 +770,7 @@
                 <div class="box box-nerd">
                     <input type="checkbox" id="nerd">
                 </div>
-                <div class="box box-activity-input">
-                    <textarea id="activity" maxlength="43">CODE</textarea>
-                </div>
+                <input class="box box-activity-input" type="text" autofocus id="activity" maxlength="43" value="CODE" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value"/>
                 <div class="box box-size-european">
                     <label for="A4">
                         A4
@@ -785,13 +783,11 @@
                     </label>
                     <input type="radio" id="a3" name="size" value="Letter" />
                 </div>
-                <div class="box box-quote-input">
-                    <textarea id="quote" maxlength="177">Every great wizard in history has started out as nothing more than we are now: students. If they can do it why not us?</textarea>
-                    <p id="quoteLength">175</p>
+                <div class="box-quote-input">
+                    <textarea class="box" id="quote" maxlength="160">Every great wizard in history has started out as nothing more than we are now: students. If they can do it why not us?</textarea>
+                    <p id="quoteLength">150/160</p>
                 </div>
-                <div class="box box-author-input">
-                    <textarea id="quoteAuthor" maxlength="53">Harry Potter</textarea>
-                </div>
+                <input type="text" class="box box-author-input" id="quoteAuthor" maxlength="53" value="Harry Potter" />
             </div>
             <button id="download" class="download">GET YOUR POSTER</button>
             <script src="../node_modules/typeit/dist/typeit.min.js"></script>
