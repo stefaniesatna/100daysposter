@@ -19,6 +19,10 @@ h1 {
     margin: 0 -2em 0.2em -2em;
 }
 
+img {
+    width: 3em;
+}
+
 #typeEffect {
 }
 
@@ -254,21 +258,32 @@ h1 {
 
                     background-color: #ebb733;
                 }
-                    input[type="checkbox"] {
-                        opacity: 0;
-                        position: fixed;
-                        width: 0;
-                    }
 
-                    input[type="checkbox"] + label{
+                    .yellow-box {
+                        background-color: #ebb733;
+                        box-sizing: border-box;
                         cursor: pointer;
+                        width: 100%;
+                        height: 100%;
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        font-weight: 600;
                     }
 
-                    input[type="checkbox"]:checked + label{
-                        box-sizing: content-box;
-                        border-width: 4px;
-                        cursor: default;
-                    }
+                        input[type="checkbox"] {
+                            opacity: 0;
+                            position: fixed;
+                            width: 0;
+                        }
+
+                        input[type="checkbox"]:checked + .yellow-box{
+                            border-style: solid;
+                            border-color: black;
+                            border-width: 4px;
+                        }
 
                 .box-activity-input{
                     grid-row-start: 2;
@@ -299,11 +314,6 @@ h1 {
                     grid-column-start: 2;
                     grid-column-end: 3;
 
-                    display: flex;
-                    align-items:center;
-                    justify-content: center;
-                    font-weight: 600;
-
                 }
 
                 .box-size-american{
@@ -313,10 +323,6 @@ h1 {
                     grid-column-start: 3;
                     grid-column-end: 5;
                     
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-weight: 600;
                 }
 
                 .box-quote-input{
