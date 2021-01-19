@@ -9,7 +9,7 @@ export function saveByteArray(name, byte) {
     link.click();
 };
 
-export async function createPdf(backgroundColor, textColour, activity, quote, quoteAuthor, pageSize) {
+export async function createPdf(backgroundColor, textColour, nerd, activity, quote, quoteAuthor, pageSize) {
 
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage(PageSizes[pageSize])
@@ -82,7 +82,7 @@ export async function createPdf(backgroundColor, textColour, activity, quote, qu
             })
 
             // Draw numbers in the middle of the little squares
-            let number = (10 * i + j + 1).toString();
+            let number = (10 * i + j + 1 - nerd).toString();
             let numberWidth = font.widthOfTextAtSize(number, numberSize);
             let numberHeight = font.heightAtSize(numberSize) - 6
             let numberX = littleSquareX + (littleSquareSize / 2) - (numberWidth / 2);

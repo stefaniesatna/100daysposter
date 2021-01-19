@@ -402,3 +402,7 @@ img {
                 color: #080705;
                 font-size: 2em;
             }
+
+            .hidden {
+                display: none;
+            }

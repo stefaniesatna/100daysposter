@@ -22,6 +22,9 @@ for (let i = 0; i < textColour.length; i++){
     textColour[i].addEventListener("change", textColourChanged);
 }
 
+const nerd = document.getElementById("nerd")
+nerd.addEventListener("change", updatePreviewNerdNumbering)
+
 const activity = document.getElementById("activity");
 activity.addEventListener("keyup", updatePreviewTitleText)
 activity.addEventListener("change", updatePreviewTitleText)
@@ -45,10 +48,7 @@ quoteAuthor.addEventListener("change", updatePreviewAuthorText)
 
 const size = [
     document.getElementById("a4"),
-    document.getElementById("a3"),
-    document.getElementById("a2"),
-    document.getElementById("a1"),
-    document.getElementById("a0"),
+    document.getElementById("letter"),
 ]
 
 function backgroundColourChanged() {
@@ -95,6 +95,15 @@ function textColourSelected(){
     }
 }
 
+function nerdSelected(){
+    if (nerd.checked){
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
 function activitySelected(){
     return activity.value;
 }
@@ -122,6 +131,7 @@ function updatePreviewBackgroundColour(){
 function updatePreviewTextColour(){
     document.getElementById("poster-quote").style.color = textColourSelected()
     document.getElementById("author").style.color = textColourSelected()
+    document.getElementById("poster-title").style.color = textColourSelected()
 
     let paths = document.getElementsByTagName("path")
     for (let path of paths) {
@@ -138,6 +148,13 @@ function updatePreviewTitleText(){
     document.getElementById("poster-title").textContent = "100 DAYS OF " + activitySelected()
 }
 
+function updatePreviewNerdNumbering(){
+    let tspans = document.getElementsByTagName("tspan")
+    for (let i = 0; i < tspans.length; i++) {
+        tspans[i].innerHTML = parseInt((i + 1 - nerdSelected()), 10)
+    }
+}
+
 function updatePreviewQuoteText(){
     document.getElementById("poster-quote").textContent = formatQuote(quoteSelected())
 }
@@ -148,9 +165,8 @@ function updatePreviewAuthorText(){
 
 //--------Download
 async function downloadButtonClicked(){
-    const pdfBytes = await createPdf(backgroundColourSelected(), textColourSelected(), activitySelected(), quoteSelected(), quoteAuthorSelected(), sizeSelected());
+    const pdfBytes = await createPdf(backgroundColourSelected(), textColourSelected(), nerdSelected(), activitySelected(), quoteSelected(), quoteAuthorSelected(), sizeSelected());
     saveByteArray("poster.pdf", pdfBytes);
 }
 
 // document.getElementById("poster").style.backgroundColor = "slategrey"
-
