@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "pdf-lib": "^1.13.0",
-    "typeit": "^7.0.4"
+    "typeit": "^7.0.4",
+    "validate-color": "^2.1.1"
   },
   "browserslist": [
     "since 2017-06"

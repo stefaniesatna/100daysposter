@@ -1,4 +1,5 @@
 import {saveByteArray, createPdf, formatQuote} from './pdf'
+import { validateHTMLColorName,  validateHTMLColorHex} from "validate-color";
 
 const backgroundColour = [
     document.getElementById("background-colour-white"),
@@ -8,8 +9,38 @@ const backgroundColour = [
     document.getElementById("background-colour-yellow"),
     document.getElementById("background-colour-grey"), 
 ];
+
+const colourError = document.getElementById("colourError")
 const customBackgroundColour = document.getElementById("colour-code");
-customBackgroundColour.addEventListener("input", customBackgroundColourChanged);
+
+customBackgroundColour.addEventListener("keyup", () => {
+    customBackgroundColourChanged();
+    displayError();
+})
+
+customBackgroundColour.addEventListener("change", () => {
+    customBackgroundColourChanged();
+    displayError();
+})
+
+customBackgroundColour.addEventListener("paste", () => {
+    customBackgroundColourChanged();
+    displayError();
+})
+
+function isValidColour(text){
+    return validateHTMLColorHex(text);
+}
+
+function displayError() {
+    if (colourError.classList.contains("hidden") && !isValidColour(customBackgroundColour.value)){
+        colourError.classList.remove("hidden")
+    }
+    else if (isValidColour(customBackgroundColour.value) && !colourError.classList.contains("hidden")){
+        colourError.classList.add("hidden")
+    }
+};
+
 
 const downloadButton = document.getElementById("download");
 downloadButton.addEventListener("click", downloadButtonClicked);
