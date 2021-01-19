@@ -30,17 +30,28 @@ activity.addEventListener("keyup", updatePreviewTitleText)
 activity.addEventListener("change", updatePreviewTitleText)
 activity.addEventListener("paste", updatePreviewTitleText)
 
+const maxCharsQuote = 160;
+const quoteLength = document.getElementById('quoteLength');
 const quote = document.getElementById("quote");
-quote.addEventListener("keyup", updatePreviewQuoteText)
-quote.addEventListener("change", updatePreviewQuoteText)
-quote.addEventListener("paste", updatePreviewQuoteText)
 
+quote.addEventListener("keyup", () => {
+    updateQuoteCount();
+    updatePreviewQuoteText();
+})
 
-// TODO
+quote.addEventListener("change", () => {
+    updateQuoteCount();
+    updatePreviewQuoteText();
+})
 
-// const quoteLength = document.getElementById("quoteLength")
-// quoteLength.addEventListener("key")
-// quoteLength.innerHTML = `${quote.value.length}/175`
+quote.addEventListener("paste", () => {
+    updateQuoteCount();
+    updatePreviewQuoteText();
+})
+
+function updateQuoteCount() {
+    quoteLength.innerHTML = `${quote.value.length}/${maxCharsQuote}`;
+};
 
 const quoteAuthor = document.getElementById("quoteAuthor")
 quoteAuthor.addEventListener("keyup", updatePreviewAuthorText)
