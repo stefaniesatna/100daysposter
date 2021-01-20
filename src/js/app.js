@@ -11,7 +11,9 @@ const backgroundColour = [
     document.getElementById("background-colour-grey"), 
 ];
 
-const someError = document.getElementById("someError")
+const errorMessage = document.getElementById("errorMessage")
+const errorHex = '! Custom colour is not a valid <a class="redText" target="_blank" href="https://www.color-hex.com/">hexadecimal colour</a>, try again"'
+
 const customBackgroundColour = document.getElementById("colour-code");
 
 customBackgroundColour.addEventListener("focus", () => {
@@ -20,7 +22,28 @@ customBackgroundColour.addEventListener("focus", () => {
 
 customBackgroundColour.addEventListener("keyup", () => {
     customBackgroundColourChanged();
-    hideError();
+    // hide error if colour is valid or value is empty
+    let value = customBackgroundColour.value
+    let firstChar = value.split("")[0]
+    if (firstChar === "#" && (value.length === 4 || value.length === 7)){
+        if (isValidColour(value)){
+            hideError()
+        }
+        else if (value.length === 7){
+            displayError()
+        }
+    }
+    else if (firstChar !== "#" && (value.length === 3 || value.length === 6)){
+        if (isValidColour(value)){
+            hideError()
+        }
+        else if (value.length === 6){
+            displayError()
+        }
+    }
+    else if (customBackgroundColour.value.length === 0){
+        hideError()
+    }
 });
 
 customBackgroundColour.addEventListener("change", () => {
@@ -60,15 +83,15 @@ function isValidColour(text){
 }
 
 function displayError() {
-    if (someError.classList.contains("hidden") && 
-        !isValidColour(customBackgroundColour.value )){
-            someError.classList.remove("hidden")
+    if (errorMessage.classList.contains("hidden") && 
+        !isValidColour(customBackgroundColour.value)){
+            errorMessage.classList.remove("hidden")
     }
 };
 
-function hideError() {
-    if (isValidColour(customBackgroundColour.value) && !someError.classList.contains("hidden")){
-        someError.classList.add("hidden")
+function hideError(){
+    if (!errorMessage.classList.contains("hidden")){
+        errorMessage.classList.add("hidden")
     }
 }
 
@@ -80,6 +103,7 @@ const textColour = [
     document.getElementById("dark"),
     document.getElementById("light")
 ];
+
 for (let i = 0; i < textColour.length; i++){
     textColour[i].addEventListener("change", textColourChanged);
 }
@@ -127,7 +151,8 @@ const size = [
 function backgroundColourChanged() {
     updatePreviewBackgroundColour()
     customBackgroundColour.value = "";
-    customBackgroundColour.classList.remove("colour-code-selected")
+    customBackgroundColour.classList.remove("colour-code-selected");
+    hideError();
 }
 
 for (let i = 0; i < backgroundColour.length; i++){
