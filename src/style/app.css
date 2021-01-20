@@ -6,6 +6,15 @@ button {
     box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+button:hover {
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.5);
+}
+
 body {
     background-color: #ebb733;
     font-family: 'Courier Prime', monospace;
@@ -28,6 +37,10 @@ img {
 
 .hidden {
     display: none;
+}
+
+.redText {
+    color:#de1a1a;
 }
 
     .container {
@@ -237,6 +250,15 @@ img {
 
                     }
                         .colour-code:focus {
+                            outline: none;
+                            border: none;
+
+                            outline-style: solid;
+                            outline-width: 4px;
+                            outline-color: black;
+                        }
+
+                        .colour-code-selected {
                             outline: none;
                             border: none;
 

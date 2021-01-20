@@ -1,5 +1,6 @@
 import {saveByteArray, createPdf, formatQuote} from './pdf'
 import { validateHTMLColorName,  validateHTMLColorHex} from "validate-color";
+import { arrayAsString } from 'pdf-lib';
 
 const backgroundColour = [
     document.getElementById("background-colour-white"),
@@ -10,36 +11,66 @@ const backgroundColour = [
     document.getElementById("background-colour-grey"), 
 ];
 
-const colourError = document.getElementById("colourError")
+const someError = document.getElementById("someError")
 const customBackgroundColour = document.getElementById("colour-code");
+
+customBackgroundColour.addEventListener("focus", () => {
+    customBackgroundColourChanged();
+});
 
 customBackgroundColour.addEventListener("keyup", () => {
     customBackgroundColourChanged();
-    displayError();
-})
+    hideError();
+});
 
 customBackgroundColour.addEventListener("change", () => {
     customBackgroundColourChanged();
     displayError();
-})
+});
 
 customBackgroundColour.addEventListener("paste", () => {
     customBackgroundColourChanged();
     displayError();
+});
+
+// If custom background colour has a valid colour, keep "focused" styling
+customBackgroundColour.addEventListener("blur", () => {
+    if (isValidColour(customBackgroundColour.value)){
+        customBackgroundColour.classList.add("colour-code-selected")
+    }
+});
+
+/* If a user has focused custom colour, but left it empty and now is out of focus
+with no colour selected, default to white */
+[customBackgroundColour, ...backgroundColour].forEach(item => {
+    item.addEventListener('focusout', () => {
+      if (backgroundColourSelected() === ""){
+          backgroundColour[0].checked = true
+      }
+    })
 })
 
 function isValidColour(text){
-    return validateHTMLColorHex(text);
+    // Add a hashtag if it's not starting with one
+    let arr = text.split("")
+    if (arr[0] !== "#"){
+        arr.unshift("#")
+    }
+    return validateHTMLColorHex(arr.join(""));
 }
 
 function displayError() {
-    if (colourError.classList.contains("hidden") && !isValidColour(customBackgroundColour.value)){
-        colourError.classList.remove("hidden")
-    }
-    else if (isValidColour(customBackgroundColour.value) && !colourError.classList.contains("hidden")){
-        colourError.classList.add("hidden")
+    if (someError.classList.contains("hidden") && 
+        !isValidColour(customBackgroundColour.value )){
+            someError.classList.remove("hidden")
     }
 };
+
+function hideError() {
+    if (isValidColour(customBackgroundColour.value) && !someError.classList.contains("hidden")){
+        someError.classList.add("hidden")
+    }
+}
 
 
 const downloadButton = document.getElementById("download");
@@ -96,6 +127,7 @@ const size = [
 function backgroundColourChanged() {
     updatePreviewBackgroundColour()
     customBackgroundColour.value = "";
+    customBackgroundColour.classList.remove("colour-code-selected")
 }
 
 for (let i = 0; i < backgroundColour.length; i++){
@@ -103,14 +135,18 @@ for (let i = 0; i < backgroundColour.length; i++){
 }
 
 function backgroundColourSelected(){
+    let colourSelected = ""
     if (customBackgroundColour.value !== "") {
-        return customBackgroundColour.value;
+        colourSelected = customBackgroundColour.value
+        return colourSelected;
     }
     for (let i = 0; i < backgroundColour.length; i++){
         if (backgroundColour[i].checked){
-            return backgroundColour[i].value;
+            colourSelected = backgroundColour[i].value
+            return colourSelected;
         }
     }
+    return colourSelected;
 }
 
 function customBackgroundColourChanged(){
