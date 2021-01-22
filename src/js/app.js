@@ -67,7 +67,7 @@ customBackgroundColour.addEventListener("blur", () => {
 with no colour selected, default to white */
 [customBackgroundColour, ...backgroundColour].forEach(item => {
     item.addEventListener('focusout', () => {
-      if (backgroundColourSelected() === ""){
+      if (backgroundColourSelected() === "" ){
           backgroundColour[0].checked = true
       }
     })
@@ -80,7 +80,7 @@ function isValidColour(text){
         arr.unshift("#")
     }
     return validateHTMLColorHex(arr.join(""));
-}
+}c
 
 function displayError() {
     if (errorMessage.classList.contains("hidden") && 
