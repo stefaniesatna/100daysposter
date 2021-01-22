@@ -81,7 +81,7 @@ function isValidColour(text) {
         arr.unshift("#")
     }
     return validateHTMLColorHex(arr.join(""));
-} c
+}
 
 function displayError() {
     if (errorMessage.classList.contains("hidden") &&
@@ -276,7 +276,7 @@ async function downloadButtonClicked() {
 // document.getElementById("poster").style.backgroundColor = "slategrey"
 
 // TITLE ANIMATION
-const activities = ["CODE", "EXERCISE", "READING", "FAMILY"]
+const activities = ["CODE", "WORKOUT", "BOOKS"]
 new TypeIt(document.getElementById("typeEffect"), {
     deleteSpeed: 100,
     lifeLike: false,
@@ -291,9 +291,5 @@ new TypeIt(document.getElementById("typeEffect"), {
     .delete(activities[1].length)
     .type(activities[2], { delay: 1000 })
     .delete(activities[2].length)
-    .type(activities[3], { delay: 1000 })
-    .delete(activities[3].length)
-    .type(activities[4], { delay: 1000 })
-    .delete(activities[4].length)
     .type(activities[0])
     .go();
