@@ -1,6 +1,7 @@
-import {saveByteArray, createPdf, formatQuote} from './pdf'
-import { validateHTMLColorName,  validateHTMLColorHex} from "validate-color";
+import { saveByteArray, createPdf, formatQuote } from './pdf'
+import { validateHTMLColorName, validateHTMLColorHex } from "validate-color";
 import { arrayAsString } from 'pdf-lib';
+import TypeIt from "typeit";
 
 const backgroundColour = [
     document.getElementById("background-colour-white"),
@@ -8,7 +9,7 @@ const backgroundColour = [
     document.getElementById("background-colour-pink"),
     document.getElementById("background-colour-purple"),
     document.getElementById("background-colour-yellow"),
-    document.getElementById("background-colour-grey"), 
+    document.getElementById("background-colour-grey"),
 ];
 
 const errorMessage = document.getElementById("errorMessage")
@@ -25,23 +26,23 @@ customBackgroundColour.addEventListener("keyup", () => {
     // hide error if colour is valid or value is empty
     let value = customBackgroundColour.value
     let firstChar = value.split("")[0]
-    if (firstChar === "#" && (value.length === 4 || value.length === 7)){
-        if (isValidColour(value)){
+    if (firstChar === "#" && (value.length === 4 || value.length === 7)) {
+        if (isValidColour(value)) {
             hideError()
         }
-        else if (value.length === 7){
+        else if (value.length === 7) {
             displayError()
         }
     }
-    else if (firstChar !== "#" && (value.length === 3 || value.length === 6)){
-        if (isValidColour(value)){
+    else if (firstChar !== "#" && (value.length === 3 || value.length === 6)) {
+        if (isValidColour(value)) {
             hideError()
         }
-        else if (value.length === 6){
+        else if (value.length === 6) {
             displayError()
         }
     }
-    else if (customBackgroundColour.value.length === 0){
+    else if (customBackgroundColour.value.length === 0) {
         hideError()
     }
 });
@@ -58,7 +59,7 @@ customBackgroundColour.addEventListener("paste", () => {
 
 // If custom background colour has a valid colour, keep "focused" styling
 customBackgroundColour.addEventListener("blur", () => {
-    if (isValidColour(customBackgroundColour.value)){
+    if (isValidColour(customBackgroundColour.value)) {
         customBackgroundColour.classList.add("colour-code-selected")
     }
 });
@@ -67,30 +68,30 @@ customBackgroundColour.addEventListener("blur", () => {
 with no colour selected, default to white */
 [customBackgroundColour, ...backgroundColour].forEach(item => {
     item.addEventListener('focusout', () => {
-      if (backgroundColourSelected() === "" ){
-          backgroundColour[0].checked = true
-      }
+        if (backgroundColourSelected() === "") {
+            backgroundColour[0].checked = true
+        }
     })
 })
 
-function isValidColour(text){
+function isValidColour(text) {
     // Add a hashtag if it's not starting with one
     let arr = text.split("")
-    if (arr[0] !== "#"){
+    if (arr[0] !== "#") {
         arr.unshift("#")
     }
     return validateHTMLColorHex(arr.join(""));
-}c
+} c
 
 function displayError() {
-    if (errorMessage.classList.contains("hidden") && 
-        !isValidColour(customBackgroundColour.value)){
-            errorMessage.classList.remove("hidden")
+    if (errorMessage.classList.contains("hidden") &&
+        !isValidColour(customBackgroundColour.value)) {
+        errorMessage.classList.remove("hidden")
     }
 };
 
-function hideError(){
-    if (!errorMessage.classList.contains("hidden")){
+function hideError() {
+    if (!errorMessage.classList.contains("hidden")) {
         errorMessage.classList.add("hidden")
     }
 }
@@ -104,7 +105,7 @@ const textColour = [
     document.getElementById("light")
 ];
 
-for (let i = 0; i < textColour.length; i++){
+for (let i = 0; i < textColour.length; i++) {
     textColour[i].addEventListener("change", textColourChanged);
 }
 
@@ -155,18 +156,18 @@ function backgroundColourChanged() {
     hideError();
 }
 
-for (let i = 0; i < backgroundColour.length; i++){
+for (let i = 0; i < backgroundColour.length; i++) {
     backgroundColour[i].addEventListener("change", backgroundColourChanged)
 }
 
-function backgroundColourSelected(){
+function backgroundColourSelected() {
     let colourSelected = ""
     if (customBackgroundColour.value !== "") {
         colourSelected = customBackgroundColour.value
         return colourSelected;
     }
-    for (let i = 0; i < backgroundColour.length; i++){
-        if (backgroundColour[i].checked){
+    for (let i = 0; i < backgroundColour.length; i++) {
+        if (backgroundColour[i].checked) {
             colourSelected = backgroundColour[i].value
             return colourSelected;
         }
@@ -174,32 +175,32 @@ function backgroundColourSelected(){
     return colourSelected;
 }
 
-function customBackgroundColourChanged(){
-    for (let i = 0; i < backgroundColour.length; i++){
-        if (backgroundColour[i].checked){
+function customBackgroundColourChanged() {
+    for (let i = 0; i < backgroundColour.length; i++) {
+        if (backgroundColour[i].checked) {
             backgroundColour[i].checked = false;
         }
     }
     updatePreviewBackgroundColour()
 }
 
-function textColourChanged(){
+function textColourChanged() {
     updatePreviewTextColour()
 }
 
 /**
  * Returns the selected text colour as a string
  */
-function textColourSelected(){
-    for (let i = 0; i < textColour.length; i++){
-        if (textColour[i].checked){
+function textColourSelected() {
+    for (let i = 0; i < textColour.length; i++) {
+        if (textColour[i].checked) {
             return textColour[i].value;
         }
     }
 }
 
-function nerdSelected(){
-    if (nerd.checked){
+function nerdSelected() {
+    if (nerd.checked) {
         return 1;
     }
     else {
@@ -207,31 +208,31 @@ function nerdSelected(){
     }
 }
 
-function activitySelected(){
+function activitySelected() {
     return activity.value;
 }
 
-function quoteSelected(){
+function quoteSelected() {
     return quote.value;
 }
 
-function quoteAuthorSelected(){
+function quoteAuthorSelected() {
     return quoteAuthor.value;
 }
 
-function sizeSelected(){
-    for (let i = 0; i < size.length; i++){
-        if (size[i].checked){
+function sizeSelected() {
+    for (let i = 0; i < size.length; i++) {
+        if (size[i].checked) {
             return size[i].value;
         }
     }
 }
 
-function updatePreviewBackgroundColour(){
+function updatePreviewBackgroundColour() {
     document.getElementById("poster").style.backgroundColor = backgroundColourSelected()
 }
 
-function updatePreviewTextColour(){
+function updatePreviewTextColour() {
     document.getElementById("poster-quote").style.color = textColourSelected()
     document.getElementById("author").style.color = textColourSelected()
     document.getElementById("poster-title").style.color = textColourSelected()
@@ -239,7 +240,7 @@ function updatePreviewTextColour(){
     let paths = document.getElementsByTagName("path")
     for (let path of paths) {
         path.setAttribute("stroke", textColourSelected())
-    }   
+    }
 
     let text = document.getElementsByTagName("text")
     for (let t of text) {
@@ -247,29 +248,52 @@ function updatePreviewTextColour(){
     }
 }
 
-function updatePreviewTitleText(){
+function updatePreviewTitleText() {
     document.getElementById("poster-title").textContent = "100 DAYS OF " + activitySelected()
 }
 
-function updatePreviewNerdNumbering(){
+function updatePreviewNerdNumbering() {
     let tspans = document.getElementsByTagName("tspan")
     for (let i = 0; i < tspans.length; i++) {
         tspans[i].innerHTML = parseInt((i + 1 - nerdSelected()), 10)
     }
 }
 
-function updatePreviewQuoteText(){
+function updatePreviewQuoteText() {
     document.getElementById("poster-quote").textContent = formatQuote(quoteSelected())
 }
 
-function updatePreviewAuthorText(){
+function updatePreviewAuthorText() {
     document.getElementById("author").textContent = quoteAuthorSelected()
 }
 
 //--------Download
-async function downloadButtonClicked(){
+async function downloadButtonClicked() {
     const pdfBytes = await createPdf(backgroundColourSelected(), textColourSelected(), nerdSelected(), activitySelected(), quoteSelected(), quoteAuthorSelected(), sizeSelected());
     saveByteArray("poster.pdf", pdfBytes);
 }
 
 // document.getElementById("poster").style.backgroundColor = "slategrey"
+
+// TITLE ANIMATION
+const activities = ["CODE", "EXERCISE", "READING", "FAMILY"]
+new TypeIt(document.getElementById("typeEffect"), {
+    deleteSpeed: 100,
+    lifeLike: false,
+    startDelay: 250,
+    afterComplete: function (step, instance) {
+        instance.destroy();
+    }
+})
+    .pause(1000)
+    .delete(activities[0].length)
+    .type(activities[1], { delay: 1000 })
+    .delete(activities[1].length)
+    .type(activities[2], { delay: 1000 })
+    .delete(activities[2].length)
+    .type(activities[3], { delay: 1000 })
+    .delete(activities[3].length)
+    .type(activities[4], { delay: 1000 })
+    .delete(activities[4].length)
+    .type(activities[0])
+    .go();
