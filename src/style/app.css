@@ -15,10 +15,18 @@ body {
     justify-content: center;
 }
 
+footer {
+    border-style: solid;
+    border-color: red;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
 @media screen
 and (max-width: 1800px) {
     .container{
-        transform: scale(0.9);
+        transform: scale(0.8);
     }
 }
 
