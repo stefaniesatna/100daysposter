@@ -13,7 +13,6 @@ const backgroundColour = [
 ];
 
 const errorMessage = document.getElementById("errorMessage")
-const errorHex = '! Custom colour is not a valid <a class="redText" target="_blank" href="https://www.color-hex.com/">hexadecimal colour</a>, try again"'
 
 const customBackgroundColour = document.getElementById("colour-code");
 
@@ -57,9 +56,9 @@ customBackgroundColour.addEventListener("paste", () => {
     displayError();
 });
 
-// If custom background colour has a valid colour, keep "focused" styling
+// If there is value in custom colour code, keep focused styling
 customBackgroundColour.addEventListener("blur", () => {
-    if (isValidColour(customBackgroundColour.value)) {
+    if (customBackgroundColour.value) {
         customBackgroundColour.classList.add("colour-code-selected")
     }
 });
@@ -98,7 +97,14 @@ function hideError() {
 
 
 const downloadButton = document.getElementById("download");
-downloadButton.addEventListener("click", downloadButtonClicked);
+downloadButton.addEventListener("click", () => {
+    if (customBackgroundColour.value && !isValidColour(customBackgroundColour.value)){
+        alert("Custom colour needs to be a hexadecimal rgb code. Please try again or select one of the predefined colours.")
+    }
+    else {
+        downloadButtonClicked()
+    }
+});
 
 const textColour = [
     document.getElementById("dark"),

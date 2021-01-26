@@ -36,16 +36,18 @@ a {
     color: #000000;
 }
 
-a:visited {
-    color: #542344;
-}
-
 a:hover {
     color: #ffffff;
 }
 
-a:focus {
-    color: #ffffff;
+#errorLink {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #de1a1a;
+}
+
+#errorLink:hover {
+    color: #542344;
 }
 
 @media screen
