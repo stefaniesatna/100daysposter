@@ -102,6 +102,7 @@ downloadButton.addEventListener("click", () => {
         alert("Custom colour needs to be a hexadecimal rgb code. Please try again or select one of the predefined colours.")
     }
     else {
+        plausible('Download Poster')
         downloadButtonClicked()
     }
 });
