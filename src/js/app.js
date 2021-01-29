@@ -21,23 +21,24 @@ customBackgroundColour.addEventListener("focus", () => {
 });
 
 customBackgroundColour.addEventListener("keyup", () => {
-    customBackgroundColourChanged();
     // hide error if colour is valid or value is empty
     let value = customBackgroundColour.value
     let firstChar = value.split("")[0]
-    if (firstChar === "#" && (value.length === 4 || value.length === 7)) {
+    if (firstChar === "#" && (value.length === 7)) {
         if (isValidColour(value)) {
             hideError()
+            customBackgroundColourChanged();
         }
-        else if (value.length === 7) {
+        else {
             displayError()
         }
     }
-    else if (firstChar !== "#" && (value.length === 3 || value.length === 6)) {
+    else if (firstChar !== "#" && (value.length === 6)) {
         if (isValidColour(value)) {
             hideError()
+            customBackgroundColourChanged();
         }
-        else if (value.length === 6) {
+        else {
             displayError()
         }
     }
