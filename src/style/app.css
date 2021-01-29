@@ -392,7 +392,7 @@ img {
                             width: 0;
                         }
 
-                        input[type="checkbox"]:checked + .yellow-box{
+                        input[type="checkbox"]:checked + .nerd{
                             border-style: solid;
                             border-color: black;
                             border-width: 4px;
