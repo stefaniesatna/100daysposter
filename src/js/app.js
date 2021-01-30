@@ -68,6 +68,7 @@ customBackgroundColour.addEventListener("blur", () => {
 with no colour selected, default to white */
 [customBackgroundColour, ...backgroundColour].forEach(item => {
     item.addEventListener('focusout', () => {
+        backgroundColourSelected()
         if (backgroundColourSelected() === "") {
             backgroundColour[0].checked = true
             hideError()
@@ -173,15 +174,15 @@ for (let i = 0; i < backgroundColour.length; i++) {
 
 function backgroundColourSelected() {
     let colourSelected = ""
-    if (customBackgroundColour.value !== "") {
-        colourSelected = customBackgroundColour.value
-        return colourSelected;
-    }
     for (let i = 0; i < backgroundColour.length; i++) {
         if (backgroundColour[i].checked) {
             colourSelected = backgroundColour[i].value
             return colourSelected;
         }
+    }
+    if (customBackgroundColour.value !== "") {
+        colourSelected = customBackgroundColour.value
+        return colourSelected;
     }
     return colourSelected;
 }
