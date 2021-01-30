@@ -70,6 +70,9 @@ with no colour selected, default to white */
     item.addEventListener('focusout', () => {
         if (backgroundColourSelected() === "") {
             backgroundColour[0].checked = true
+            hideError()
+            customBackgroundColour.classList.remove("colour-code-selected")
+            backgroundColourChanged()
         }
     })
 })
@@ -158,10 +161,10 @@ const size = [
 ]
 
 function backgroundColourChanged() {
-    updatePreviewBackgroundColour()
     customBackgroundColour.value = "";
     customBackgroundColour.classList.remove("colour-code-selected");
     hideError();
+    updatePreviewBackgroundColour()
 }
 
 for (let i = 0; i < backgroundColour.length; i++) {
