@@ -4,13 +4,13 @@
 
 Ever came across the [#100daysofcode](https://twitter.com/search?q=%23100daysofcode) challenge? Download a poster with 100 squares, print it out, cross one off every day and [don't break the chain!](https://blog.doist.com/dont-break-the-chain/) Benefits are inclusive of, but not limited to: 
 
-- dopamine hit from physically crossing a day off (it's rather satisfactory 😌)
+- dopamine hit from physically crossing a day off (it's rather satisfactory 😌 )
 - visual reminder of your progress and commitment
 
 * * *
 
-💻✅ Supporting most desktop screen sizes  
-📱🚫 Mobile support currently not available
+💻 ✅ Supporting most desktop screen sizes  
+📱 🚫 Mobile support currently not available
 
 ## How it works
 1️⃣ **Customise your poster and download it**
@@ -46,7 +46,7 @@ code to run it locally
 [pdf.js](https://github.com/stefaniesatna/poster-site/blob/master/src/js/pdf.js) handles generating the pdf
 
 ### Disclaimer
-Be warned: This is my first project and the codebase looks accordingly 😬 Feedback and suggestions are welcome, just open a PR. 
+Be warned: This is my first project and the codebase looks accordingly 😬 Feedback and suggestions are welcome, just open a PR  
 ## License
 MIT
 
