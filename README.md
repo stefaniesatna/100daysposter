@@ -22,7 +22,7 @@ Ever came across the [#100daysofcode](https://twitter.com/search?q=%23100daysofc
 * choose to count from 0 (nerd setting)
 * insert activity you're commiting to
 * choose paper size based on the location of your printing service (Letter for North America, A4 for everywhere else)
-* insert a motivational quote
+* insert a quote
 * insert the author of a given quote 
 
 2️⃣ **Print it out and hang it up**
@@ -32,21 +32,20 @@ Ever came across the [#100daysofcode](https://twitter.com/search?q=%23100daysofc
 * [pdf-lib](https://github.com/Hopding/pdf-lib)
 * [cssnano](https://github.com/cssnano/cssnano)
 * [parcel-bundler](https://github.com/parcel-bundler/parcel)
-* [tslib](https://github.com/Microsoft/tslib)
-* [pako](https://github.com/nodeca/pako)
 * [typeit](https://github.com/alexmacarthur/typeit)
 * [validate-color](https://github.com/dreamyguy/validate-color)
 
-## Run it locally
+## Run it locally  
+Clone the repo and run:
 ``` js
-code to run it locally
+yarn start
 ```
 ### Main functionality
 [app.js](https://github.com/stefaniesatna/poster-site/blob/master/src/js/app.js) is responsible for customisation form and the poster preview   
 [pdf.js](https://github.com/stefaniesatna/poster-site/blob/master/src/js/pdf.js) handles generating the pdf
 
 ### Disclaimer
-Be warned: This is my first project and the codebase looks accordingly 😬 Feedback and suggestions are welcome, just open a PR  
+Be warned: This is my first project and the codebase looks accordingly 😬 Feedback and suggestions are welcome, just open a PR 🙏
 ## License
 MIT
 
