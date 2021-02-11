@@ -38,6 +38,15 @@ Ever came across the [#100daysofcode](https://twitter.com/search?q=%23100daysofc
 * [validate-color](https://github.com/dreamyguy/validate-color)
 
 ## Run it locally
+``` js
+code to run it locally
+```
+### Main functionality
+[app.js](https://github.com/stefaniesatna/poster-site/blob/master/src/js/app.js) is responsible for customisation form and the poster preview   
+[pdf.js](https://github.com/stefaniesatna/poster-site/blob/master/src/js/pdf.js) handles generating the pdf
+
+### Disclaimer
+Be warned: This is my first project and the codebase looks accordingly 😬 Feedback and suggestions are welcome, just open a PR. 
 ## License
 MIT
 
