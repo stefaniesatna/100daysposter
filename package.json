@@ -10,7 +10,7 @@
     "build": "parcel build src/index.html"
   },
   "dependencies": {
-    "pdf-lib": "^1.13.0",
+    "pdf-lib": "^1.13.0",t
     "typeit": "^7.0.4",
     "validate-color": "^2.1.1"
   },
